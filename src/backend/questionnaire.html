@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Составьте свой wishlist</title>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <h3>Добавьте желаемый подарок</h3>
+  <h4>Название</h4>
+  <input type='text' id="title">
+  <h4>Комментарий</h4>
+  <input type='text' id="comment">
+  <h4>На сколько желаем (от 1 до 10)</h4>
+  <input type='text' id="desireDegree">
+  <h4>Номер</h4>
+  <input type='text' id="wishId">
+  <div style="padding-top: 30px;">
+    <button id="addWish">Добавить</button>
+
+    <button id='updateWish'>Редактировать</button>
+
+    <button id='deleteWish'>Удалить</button>
+  </div>
+  <button id='registartion'>Зарегистрироваться</button>
+  <button id='signIn'>Войти</button>
+  <button id='sendResetPassword'>Забыли пароль?</button>
+  <button id='createWishList'>Создать WishList</button>
+  <button id='updateWishList'>Редактировать WishList</button>
+  <button id='orderWish'>Исполнить желание друга</button>
+
+  <form action="/profile" method="post" enctype="multipart/form-data">
+    <input type="file" name="avatar" />
+  </form>
+
+
+
+  <script>
+    const serverurl = 'http://localhost:3100'
+    let title = $('#title')
+    let comment = $('#comment')
+    let desireDegree = $('#desireDegree')
+    let wishId = $('#wishId')
+
+    let registartion = $('#registartion')
+    registartion.on("click", function () {
+      $.ajax({
+        url: `${serverurl}/api/registration`,
+        method: 'POST',
+        data: {
+          name: name.val(),
+          email: email.val(),
+          password: password.val(),
+          resetToken: resetToken.val(),
+          avatarUrl: avatarUrl.val(),
+        },
+        success: function (msg) {
+          console.log(msg)
+        }
+      })
+    })
+
+    let signIn = $('#signIn')
+    signIn.on("click", function () {
+      $.ajax({
+        url: `${serverurl}/api/sign_in` + userId.val(),  /* как передать ID юзера */
+        method: 'POST',
+        data: {
+          email: email.val(),
+          password: password.val(),
+        },
+        success: function (msg) {
+          console.log(msg)
+        }
+      })
+    })
+
+
+    let createWishList = $('#createWishList')
+    createWishList.on("click", function () {
+      $.ajax({
+        url: `${serverurl}/api/wishlists`,
+        method: 'POST',
+        success: function (msg) {
+          console.log(msg)
+        }
+      })
+    })
+
+    let updateWishList = $('#updateWishList')
+    updateWishList.on("click", function () {
+      $.ajax({
+        url: `${serverurl}/api/wishlists` + wishListId.val(),
+        method: 'PATCH',
+        success: function (msg) {
+          console.log(msg)
+        }
+      })
+    })
+
+
+    let sendResetPassword = $('#sendResetPassword')
+    sendResetPassword.on("click", function () {
+      $.ajax({
+        url: `${serverurl}/api/send_reset_password`,
+        method: 'POST',
+        success: function (msg) {
+          console.log(msg)
+        }
+      })
+    })
+
+    let addWish = $('#addWish')
+    addWish.on("click", function () {
+      $.ajax({
+        url: `${serverurl}/api/wishlists` + wishId.val() + `wishlist_item`,
+        method: 'POST',
+        data: {
+          title: title.val(),
+          comment: comment.val(),
+          desireDegree: desireDegree.val(),
+        },
+        success: function (msg) {
+          console.log(msg)
+        }
+      })
+    })
+
+    let updateWish = $('#updateWish')
+    updateWish.on("click", function () {
+      $.ajax({
+        url: `${serverurl}/api/update_wishlist_item` + wishId.val(),
+        method: 'PATCH',
+        data: {
+          title: title.val(),
+          comment: comment.val(),
+          desireDegree: desireDegree.val(),
+          picture: picture.val(),
+          reserved: reserved.val(),
+        },
+        success: function (msg) {
+          console.log(msg)
+        }
+      })
+    })
+
+    let deleteWish = $('#deleteWish')
+    deleteWish.on("click", function () {
+      $.ajax({
+        url: `${serverurl}/api/delete_wishlist_item` + wishId.val(),
+        method: 'DELETE',
+        success: function (msg) {
+          console.log(msg)
+        }
+      })
+    })
+
+    let orderWish = $('#orderWish')
+    orderWish.on("click", function () {
+      $.ajax({
+        url: `${serverurl}//api/wishlist_item/` + wishId.val(),
+        method: 'PATCH',
+        data: {
+          assigneeId: assigneeId.val()
+        },
+        success: function (msg) {
+          console.log(msg)
+        }
+      })
+    })
+  </script>
+
+</body>
+
+</html>
