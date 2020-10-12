@@ -20,6 +20,8 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+let curentUserId = "5f816f038768713dd5161668"
+
 const userSchema = new mongoose.Schema({
   name: String,
   email: String,
@@ -31,7 +33,7 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 const wishListSchema = new mongoose.Schema({
-  owner: {
+  ownerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
   },
@@ -45,12 +47,11 @@ const wishListItemSchema = new mongoose.Schema({
   comment: String,
   desireDegree: Number,
   picture: String,
-  reserved: Boolean,
   wishList: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "WishLists",
   },
-  assignee: {
+  assigneeId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
   },
@@ -71,7 +72,6 @@ app.get("/api/users", async function (req, res) {
 // Регистрация пользователя
 app.post("/api/registration", async function (req, res) {
   const body = req.body;
-  console.log(123, body);
   const user = new User({
     name: body.name,
     email: body.email,
@@ -83,16 +83,20 @@ app.post("/api/registration", async function (req, res) {
 });
 
 app.post("/api/sign_in/:id", function (req, res) {
-  /* не пойму что здесь прописывать */
+  curentUserId = req.params.id;
+  res.json({ curentUserId })
 });
 
-app.post("/api/sign_in/send_reset_password", function (req, res) {
-  /* не пойму что здесь прописывать */
-});
+//   /* не пойму что здесь прописывать */
+// });
 
-app.patch("/api/users/:id?token=%8y%", function (req, res) {
-  /* не пойму что здесь прописывать */
-});
+// app.post("/api/sign_in/send_reset_password", function (req, res) {
+//   /* не пойму что здесь прописывать */
+// });
+
+// app.patch("/api/users/:id?token=%8y%", function (req, res) {
+//   /* не пойму что здесь прописывать */
+// });
 
 // Получение списка всех WishLists
 app.get("/api/wishlists", async function (req, res) {
@@ -100,67 +104,65 @@ app.get("/api/wishlists", async function (req, res) {
   res.json(wishLists);
 });
 
+
 // Создание нового WishList
 app.post("/api/wishlists", async function (req, res) {
   const body = req.body;
   const wishList = new WishList({
-    owner: body.ownerId,
+    ownerId: body.ownerId,
     status: body.status,
   });
   const savedWishList = await wishList.save();
   res.json(savedWishList);
 });
 
-app.patch("/api/wishlists/:id", function (req, res) {
-  // TODO
-});
-
-app.post("/api/wishlists/:id/wishlist_item", async (request, response) => {
-  // const body = request.body;
-  // const wishListItem = new WishListItem({
-  //   title: body.title,
-  //   comment: body.comment,
-  //   desireDegree: body.desireDegree,
-  //   picture: body.picture,
-  //   reserved: body.reserved,
-  //   wishListId: {
-  //     typeof: mongoose.Schema.Types.ObjectId,
-  //     ref: "WishLists",
-  //   },
-  // });
-  // wishListItem.save().then((savedWishListItem) => {
-  //   response.json(savedWishListItem);
-  // });
-});
-
-// app.post('/profile', upload.single('avatar'), function (req, res, next) {
-// //   const picture = req.file
-// //   res.sendFile(picture)
-
-//   // req.body will hold the text fields, if there were any
-// })
-
-app.patch("/api/update_wishlist_item/:id", async function (req, res) {
+// Редактирование WishList НЕ РАБОТАЕТ
+app.patch("/api/wishlists/:id", async function (req, res) {
   const id = req.params.id;
-  const { title, comment, desireDegree, picture, reserved } = req.body;
+  const { ownerId, status } = req.body;
   const result = await WishListItem.update(
     { _id: id },
-    { title, comment, desireDegree, picture, reserved }
+    { ownerId, status }
   );
   res.send(result);
 });
 
-app.delete("/api/delete_wishlist_item/:id", async function (req, res) {
+// Получение списка всех WishListItem
+app.get("/api/wishlist_items", async function (req, res) {
+  const wishListItems = await WishListItem.find({});
+  res.json(wishListItems);
+});
+
+//  Создание нового WishListItem
+app.post("/api/wishlists/:wish_list_id/wishlist_item", async (req, res) => {
+  const body = req.body
+  const wishListItem = new WishListItem({
+    title: body.title,
+    comment: body.comment,
+    desireDegree: body.desireDegree,
+    picture: body.picture,
+    wishList: req.params.wish_list_id
+  });
+  const savedWishListItem = await wishListItem.save();
+  res.json(savedWishListItem);
+})
+
+// Редактирование WishListItem
+app.patch("/api/wishlists/:wish_list_id/wishlist_item/:id", async function (req, res) {
   const id = req.params.id;
-  const result = await WishListItem.deleteOne({ _id: id });
+  const { title, comment, desireDegree, picture, assigneeId } = req.body;
+  const result = await WishListItem.update(
+    { _id: id },
+    { title, comment, desireDegree, picture, assigneeId }
+  );
   res.send(result);
 });
 
-app.patch("/api/wishlist_item/:id", async function (req, res) {
-  // const id = req.params.id;
-  // const { assigneeId } = req.body;
-  // const result = await WishListItem.update({ _id: id }, { assigneeId });
-  // res.send(result);
+// Удаление WishListItem
+app.delete("/api/wishlists/:wish_list_id/wishlist_item/:id", async function (req, res) {
+  const id = req.params.id;
+  const result = await WishListItem.deleteOne({ _id: id });
+  res.send(result);
 });
 
 app.listen(port, () => {
