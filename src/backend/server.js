@@ -1,6 +1,5 @@
 const express = require("express");
 var multer = require("multer");
-var upload = multer({ dest: "uploads/" });
 
 const app = express();
 const port = 3100;
@@ -116,15 +115,20 @@ app.post("/api/wishlists", async function (req, res) {
   res.json(savedWishList);
 });
 
-// Редактирование WishList НЕ РАБОТАЕТ
+// Редактирование WishList 
 app.patch("/api/wishlists/:id", async function (req, res) {
+  console.log(1111111, 11111111)
   const id = req.params.id;
+  console.log(11, id)
   const { ownerId, status } = req.body;
-  const result = await WishListItem.update(
+  console.log(11, req.body)
+  const result = await WishList.update(
     { _id: id },
     { ownerId, status }
   );
-  res.send(result);
+  console.log(1, result)
+  res.json(result);
+
 });
 
 // Получение списка всех WishListItem
