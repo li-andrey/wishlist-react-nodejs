@@ -108,8 +108,8 @@ app.get("/api/wishlists", async function (req, res) {
 app.post("/api/wishlists", async function (req, res) {
   const body = req.body;
   const wishList = new WishList({
-    ownerId: body.ownerId,
-    status: body.status,
+    ownerId: curentUserId,
+    status: 'new',
   });
   const savedWishList = await wishList.save();
   res.json(savedWishList);
@@ -117,19 +117,17 @@ app.post("/api/wishlists", async function (req, res) {
 
 // Редактирование WishList 
 app.patch("/api/wishlists/:id", async function (req, res) {
-  console.log(1111111, 11111111)
   const id = req.params.id;
-  console.log(11, id)
-  const { ownerId, status } = req.body;
-  console.log(11, req.body)
+  const { ownerId } = req.body;
+  const status = 'edit'
   const result = await WishList.update(
-    { _id: id },
+    { wishListId: id },
     { ownerId, status }
   );
   console.log(1, result)
   res.json(result);
-
 });
+
 
 // Получение списка всех WishListItem
 app.get("/api/wishlist_items", async function (req, res) {

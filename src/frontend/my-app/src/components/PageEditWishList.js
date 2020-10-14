@@ -1,12 +1,12 @@
 import React from 'react';
+import { useParams } from "react-router-dom";
 
-
-async function postData(userId) {
+async function postData(wishListId) {
   // Default options are marked with *
   const data = {}
-  const url = `/api/sign_in/${userId}`
+  const url = `/api/wishlists/${wishListId}`
   const response = await fetch(url, {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
     credentials: 'same-origin', // include, *same-origin, omit
@@ -21,26 +21,20 @@ async function postData(userId) {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-export default function SignIn() {
-  const [userId, setUserId] = React.useState();
-  const handleChange1 = event => {
-    setUserId(event.target.value);
+export default function EditWishList() {
+  const { id } = useParams();
+  console.log(id, id)
+
+  const handleEditWishList = () => {
+    postData();
   };
 
-  const handleLogIn = () => {
-    postData(userId);
-  };
 
   return (
     <React.Fragment>
-      <h1> Авторизация </h1>
+      <h1> Редактировать WishList </h1>
       <div>
-        <p>Введите свой ID</p>
-        <p>User 1 = 5f816f038768713dd5161668</p>
-        <p>User 2 = 5f843f968c01802a7451c97c</p>
-        <input onChange={handleChange1}></input>
-        <button onClick={handleLogIn}>Войти</button>
-        <h1> Ваш ID {userId} </h1>
+        <button onClick={handleEditWishList}>Редактировать</button>
       </div>
     </React.Fragment>
 

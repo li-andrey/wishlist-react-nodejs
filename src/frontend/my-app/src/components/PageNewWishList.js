@@ -1,10 +1,9 @@
 import React from 'react';
 
-
-async function postData(userId) {
+async function postData() {
   // Default options are marked with *
   const data = {}
-  const url = `/api/sign_in/${userId}`
+  const url = '/api/wishlists'
   const response = await fetch(url, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
@@ -21,26 +20,17 @@ async function postData(userId) {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-export default function SignIn() {
-  const [userId, setUserId] = React.useState();
-  const handleChange1 = event => {
-    setUserId(event.target.value);
-  };
+export default function NewWishList() {
 
-  const handleLogIn = () => {
-    postData(userId);
+  const handleNewWishList = () => {
+    postData();
   };
 
   return (
     <React.Fragment>
-      <h1> Авторизация </h1>
+      <h1> Создать свой WishList </h1>
       <div>
-        <p>Введите свой ID</p>
-        <p>User 1 = 5f816f038768713dd5161668</p>
-        <p>User 2 = 5f843f968c01802a7451c97c</p>
-        <input onChange={handleChange1}></input>
-        <button onClick={handleLogIn}>Войти</button>
-        <h1> Ваш ID {userId} </h1>
+        <button onClick={handleNewWishList}>Создать</button>
       </div>
     </React.Fragment>
 

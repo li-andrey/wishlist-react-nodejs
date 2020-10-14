@@ -9,6 +9,8 @@ import PageHowItWorks from "./PageHowItWorks"
 import PageAbout from "./PageAbout"
 import PageHome from "./PageHome"
 import PageSignIn from "./PageSignIn"
+import PageNewWishList from "./PageNewWishList"
+import PageEditWishList from "./PageEditWishList"
 
 
 const PAGES = {
@@ -31,6 +33,16 @@ const PAGES = {
     id: "signIn",
     title: "Авторизация",
     path: "/sign_in"
+  },
+  newWishList: {
+    id: "newWishList",
+    title: "Создать свой WishList",
+    path: "/new_wishlist"
+  },
+  editWishList: {
+    id: "editWishList",
+    title: "Редактирование WishList",
+    path: "/wishlists/:id"
   }
 }
 
@@ -52,6 +64,9 @@ export default function AppRouter() {
             <li>
               <Link to={PAGES.signIn.path}> {PAGES.signIn.title} </Link>
             </li>
+            <li>
+              <Link to={PAGES.newWishList.path}> {PAGES.newWishList.title} </Link>
+            </li>
           </ul>
         </nav>
 
@@ -69,6 +84,12 @@ export default function AppRouter() {
           </Route>
           <Route exact path={PAGES.signIn.path} >
             <PageSignIn />
+          </Route>
+          <Route exact path={PAGES.newWishList.path} >
+            <PageNewWishList />
+          </Route>
+          <Route exact path={PAGES.editWishList.path}>
+            <PageEditWishList />
           </Route>
         </Switch>
       </div>
