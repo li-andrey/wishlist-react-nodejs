@@ -42,9 +42,15 @@ const PAGES = {
   editWishList: {
     id: "editWishList",
     title: "Редактирование WishList",
-    path: "/wishlists/:id"
+    path: "/wishlists/:wishListId"
   }
+  //   wishListItemAssignee: {
+  //   id: "wishListItemAssignee",
+  //   title: "Забронировать подарок",
+  //   path: "/wishlists/:wishListId/wishlist_item/:id"
+  // }
 }
+
 
 export default function AppRouter() {
   return (
@@ -90,6 +96,8 @@ export default function AppRouter() {
           </Route>
           <Route exact path={PAGES.editWishList.path}>
             <PageEditWishList />
+            {/* <Route exact path={PAGES.wishListItemAssignee.path}>
+              <PageEditWishList /> */}
           </Route>
         </Switch>
       </div>

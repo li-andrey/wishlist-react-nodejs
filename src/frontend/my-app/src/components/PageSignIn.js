@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-async function postData(userId) {
+async function postSignIn(userId) {
   // Default options are marked with *
   const data = {}
   const url = `/api/sign_in/${userId}`
@@ -28,7 +28,7 @@ export default function SignIn() {
   };
 
   const handleLogIn = () => {
-    postData(userId);
+    postSignIn(userId);
   };
 
   return (

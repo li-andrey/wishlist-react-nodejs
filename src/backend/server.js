@@ -1,8 +1,12 @@
 const express = require("express");
-var multer = require("multer");
+const bcrypt = require('bcryptjs');
+const { check, validationResult } = require('express-validator')
+const jwt = require('jsonwebtoken');
+
 
 const app = express();
 const port = 3100;
+const jwtSecret = 'showone production';
 app.use(express.json());
 const mongoose = require("mongoose");
 const url = `mongodb+srv://new:asdw34vD@cluster0.any1t.mongodb.net/test?retryWrites=true&w=majority`;
@@ -23,8 +27,8 @@ let curentUserId = "5f816f038768713dd5161668"
 
 const userSchema = new mongoose.Schema({
   name: String,
-  email: String,
-  password: String,
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
   resetToken: String,
   avatarUrl: String,
 });
@@ -42,10 +46,10 @@ const wishListSchema = new mongoose.Schema({
 const WishList = mongoose.model("WishList", wishListSchema);
 
 const wishListItemSchema = new mongoose.Schema({
+  picture: String,
   title: String,
   comment: String,
   desireDegree: Number,
-  picture: String,
   wishList: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "WishLists",
@@ -69,33 +73,84 @@ app.get("/api/users", async function (req, res) {
 });
 
 // Регистрация пользователя
-app.post("/api/registration", async function (req, res) {
-  const body = req.body;
-  const user = new User({
-    name: body.name,
-    email: body.email,
-    password: body.password,
-    avatarUrl: body.avatarUrl,
-  });
-  const savedUser = await user.save();
-  res.json(savedUser);
-});
+// app.post(
+//   "/api/registration",
+//   [
+//     check('email', 'Некорректный email').isEmail(),
+//     check('password', 'Минимальная длина пароля 6 символов').isLength({ min: 6 })
+//   ],
+//   async function (req, res) {
+//     try {
+//       const errors = validationResult(req)
+//       if (!errors.isEmpty()) {
+//         return res.status(400).json({
+//           errors: errors.array(),
+//           message: 'Некорректные данные при регистраци'
+//         })
+//       }
+//       const body = req.body
+//       const candidate = await User.findOne({ email: email })
+//       if (candidate) {
+//         return res.status(400).json({ message: 'Такой пользователь уже существует' })
+//       }
+//       const hashedPassword = await bcrypt.hash(password, 12)
+//       const user = new User({
+//         name: body.name,
+//         email: body.email,
+//         password: hashedPassword,
+//         avatarUrl: body.avatarUrl,
+//       });
+//       const savedUser = await user.save();
+//       res.status(201).json({ message: 'Пользователь создан', savedUser });
+//     }
+//     catch (error) {
+//       res.status(500).json({ message: 'Что-то пошло не так' })
+//     }
+//   }
+// )
+
+
+// // Вход в систему
+// app.post(
+//   "/api/sign_in/:id",
+//   [
+//     check('email', 'Введите корректный email').isEmail().normalizeEmail(),
+//     check('password', 'Введите пароль').exists()
+//   ],
+//   async function (req, res) {
+//     try {
+//       const errors = validationResult(req)
+//       if (!errors.isEmpty()) {
+//         return res.status(400).json({
+//           errors: errors.array(),
+//           message: 'Некорректные данные при регистраци'
+//         })
+//       }
+//       const body = req.body
+//       const user = await User.findOne({ email })
+//       if (!user) {
+//         return res.status(400).json({ message: 'Пользователь не найден' })
+//       }
+//       const isMatch = await bcrypt.compare(password, user.password)
+//       if (!isMatch) {
+//         return res.status(400).json({ message: 'Неверный пароль, попробуйте снова' })
+//       }
+//       const token = jwt.sign(
+//         { userId: user.id },
+//         jwtSecret,
+//         { expiresIn: '1h' }
+//       )
+//       res.json({ token, userId: user.id })
+
+//     } catch (error) {
+//       res.status(500).json({ message: 'Что-то пошло не так' })
+//     }
+//   })
 
 app.post("/api/sign_in/:id", function (req, res) {
   curentUserId = req.params.id;
   res.json({ curentUserId })
 });
-
-//   /* не пойму что здесь прописывать */
-// });
-
-// app.post("/api/sign_in/send_reset_password", function (req, res) {
-//   /* не пойму что здесь прописывать */
-// });
-
-// app.patch("/api/users/:id?token=%8y%", function (req, res) {
-//   /* не пойму что здесь прописывать */
-// });
 
 // Получение списка всех WishLists
 app.get("/api/wishlists", async function (req, res) {
@@ -116,18 +171,17 @@ app.post("/api/wishlists", async function (req, res) {
 });
 
 // Редактирование WishList 
-app.patch("/api/wishlists/:id", async function (req, res) {
-  const id = req.params.id;
+
+app.patch("/api/wishlists/:wish_list_id", async function (req, res) {
+  const wishListId = req.params.wish_list_id;
   const { ownerId } = req.body;
   const status = 'edit'
   const result = await WishList.update(
-    { wishListId: id },
+    { _id: wishListId },
     { ownerId, status }
   );
-  console.log(1, result)
   res.json(result);
 });
-
 
 // Получение списка всех WishListItem
 app.get("/api/wishlist_items", async function (req, res) {
@@ -135,14 +189,21 @@ app.get("/api/wishlist_items", async function (req, res) {
   res.json(wishListItems);
 });
 
+// Получение списка всех WishListItem в определенном WishList
+app.get("/api/wishlists/:wish_list_id/wishlist_item", async function (req, res) {
+  const wishListId = req.params.wish_list_id;
+  const wishListItems = await WishListItem.find({ wishList: wishListId });
+  res.json(wishListItems);
+});
+
 //  Создание нового WishListItem
 app.post("/api/wishlists/:wish_list_id/wishlist_item", async (req, res) => {
   const body = req.body
   const wishListItem = new WishListItem({
+    picture: body.picture,
     title: body.title,
     comment: body.comment,
     desireDegree: body.desireDegree,
-    picture: body.picture,
     wishList: req.params.wish_list_id
   });
   const savedWishListItem = await wishListItem.save();
@@ -152,7 +213,8 @@ app.post("/api/wishlists/:wish_list_id/wishlist_item", async (req, res) => {
 // Редактирование WishListItem
 app.patch("/api/wishlists/:wish_list_id/wishlist_item/:id", async function (req, res) {
   const id = req.params.id;
-  const { title, comment, desireDegree, picture, assigneeId } = req.body;
+  const { picture, title, comment, desireDegree } = req.body;
+  const assigneeId = curentUserId;
   const result = await WishListItem.update(
     { _id: id },
     { title, comment, desireDegree, picture, assigneeId }

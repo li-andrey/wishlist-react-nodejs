@@ -1,6 +1,6 @@
 import React from 'react';
 
-async function postData() {
+async function postWishList() {
   // Default options are marked with *
   const data = {}
   const url = '/api/wishlists'
@@ -23,7 +23,7 @@ async function postData() {
 export default function NewWishList() {
 
   const handleNewWishList = () => {
-    postData();
+    postWishList();
   };
 
   return (
