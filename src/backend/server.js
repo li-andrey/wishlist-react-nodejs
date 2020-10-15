@@ -196,7 +196,7 @@ app.get("/api/wishlists/:wish_list_id/wishlist_item", async function (req, res) 
   res.json(wishListItems);
 });
 
-//  Создание нового WishListItem
+//  Добавление нового WishListItem
 app.post("/api/wishlists/:wish_list_id/wishlist_item", async (req, res) => {
   const body = req.body
   const wishListItem = new WishListItem({
