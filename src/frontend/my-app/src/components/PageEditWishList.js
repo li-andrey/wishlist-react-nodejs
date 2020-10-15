@@ -26,7 +26,7 @@ export default function EditWishList() {
   console.log(id, id)
 
   const handleEditWishList = () => {
-    postData();
+    postData(id);
   };
 
 
