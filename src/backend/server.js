@@ -1,12 +1,12 @@
 const express = require("express");
-const bcrypt = require('bcryptjs');
-const { check, validationResult } = require('express-validator')
-const jwt = require('jsonwebtoken');
+// const bcrypt = require('bcryptjs');
+// const { check, validationResult } = require('express-validator')
+// const jwt = require('jsonwebtoken');
 
 
 const app = express();
 const port = 3100;
-const jwtSecret = 'showone production';
+// const jwtSecret = 'showone production';
 app.use(express.json());
 const mongoose = require("mongoose");
 const url = `mongodb+srv://new:asdw34vD@cluster0.any1t.mongodb.net/test?retryWrites=true&w=majority`;

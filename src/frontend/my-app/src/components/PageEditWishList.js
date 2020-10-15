@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from "react-router-dom";
+import '../css/desireDegree.css';
 
 // PATCH редактирования WishList
 async function patchWishList(wishListId) {
@@ -93,6 +94,8 @@ export default function EditWishList() {
   const { wishListId } = useParams();
   console.log("wishListId", wishListId)
 
+  const [wishListItems, setWishListItems] = React.useState([]);
+
   // Отправление POST запроса на сервер для редактирования WishList
   const handleEditWishList = () => {
     patchWishList(wishListId);
@@ -121,10 +124,25 @@ export default function EditWishList() {
   };
 
   // Отправление POST запроса на сервер для создания WishListItem
-  const handleNewWishListItem = () => {
-    postNewWishListItem(wishListId, picture, title, comment, desireDegree);
+  const handleNewWishListItem = async () => {
+    console.log(111, wishListItems);
+    const newWishListItem = await postNewWishListItem(wishListId, picture, title, comment, desireDegree);
+    console.log(333, newWishListItem);
+    const wishListItems2 = [...wishListItems];
+    console.log(555, wishListItems2);
+    const wishListItems3 = wishListItems2.push(newWishListItem);
+    console.log(777, wishListItems3);
+    setWishListItems(wishListItems3);
+    console.log(999, wishListItems3);
   };
 
+
+  // // Редактирование WishListItem
+  // const [wishListItemId, setWishListItemId] = React.useState([WishListItem]);
+  // console.log(wishListItemId, wishListItemId)
+  // const handleListItemId = event => {
+  //   setWishListItemId(event.target.value);
+  // }
 
   // // отправление POST запроса для редактирования и подтверждения Assignee
   // const handleUpdateWishListItem = () => {
@@ -144,8 +162,11 @@ export default function EditWishList() {
       <div>
         <button onClick={handleEditWishList}>Редактировать</button>
       </div>
+      {/*       <div>
+        <button onClick={handleListItemId}>WishListItemId</button>
+      </div> */}
       <div>
-        <table>
+        <table >
           <tbody>
             <tr>
               <th>Картинка</th>
@@ -164,7 +185,7 @@ export default function EditWishList() {
               <td>
                 <input placeholder="Расскажите о каких-то особенностях продукта, сфере его применения или любую другую информацию, которая поможет выбрать правильный подарок" onChange={handleComment}></input>
               </td>
-              <td onChange={handleDesireDegree}>
+              <td className="rating-area" onChange={handleDesireDegree}>
                 <input type="radio" id="star-5" name="rating" value="5" />
                 <label htmlFor="star-5" title="Оценка «5»"></label>
                 <input type="radio" id="star-4" name="rating" value="4" />
@@ -177,7 +198,7 @@ export default function EditWishList() {
                 <label htmlFor="star-1" title="Оценка «1»"></label>
               </td>
               <td>
-                <input type="checkbox" /* onClick={handleUpdateWishListItem} */ />
+                <input type="checkbox"/*  onClick={handleUpdateWishListItem}  */ />
               </td>
               <td>
                 <button onClick={handleNewWishListItem}>Добавить</button>
