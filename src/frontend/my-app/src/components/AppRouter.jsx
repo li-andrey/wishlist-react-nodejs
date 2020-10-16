@@ -1,56 +1,44 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import PageHowItWorks from "./PageHowItWorks"
-import PageAbout from "./PageAbout"
-import PageHome from "./PageHome"
-import PageSignIn from "./PageSignIn"
-import PageNewWishList from "./PageNewWishList"
-import PageEditWishList from "./PageEditWishList"
-
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import PageHowItWorks from './PageHowItWorks';
+import PageAbout from './PageAbout';
+import PageHome from './PageHome';
+import PageSignIn from './PageSignIn';
+import PageNewWishList from './PageNewWishList';
+import PageEditWishList from './PageEditWishList';
 
 const PAGES = {
   wishList: {
-    id: "wishList",
-    title: "My WishList",
-    path: "/"
+    id: 'wishList',
+    title: 'My WishList',
+    path: '/',
   },
   about: {
-    id: "about",
-    title: "Немного о нас",
-    path: "/about"
+    id: 'about',
+    title: 'Немного о нас',
+    path: '/about',
   },
   howItWorks: {
-    id: "howItWorks",
-    title: "Как это работает",
-    path: "/how_it_works"
+    id: 'howItWorks',
+    title: 'Как это работает',
+    path: '/how_it_works',
   },
   signIn: {
-    id: "signIn",
-    title: "Авторизация",
-    path: "/sign_in"
+    id: 'signIn',
+    title: 'Авторизация',
+    path: '/sign_in',
   },
   newWishList: {
-    id: "newWishList",
-    title: "Создать свой WishList",
-    path: "/new_wishlist"
+    id: 'newWishList',
+    title: 'Создать свой WishList',
+    path: '/wishlists',
   },
   editWishList: {
-    id: "editWishList",
-    title: "Редактирование WishList",
-    path: "/wishlists/:wishListId"
-  }
-  //   wishListItemAssignee: {
-  //   id: "wishListItemAssignee",
-  //   title: "Забронировать подарок",
-  //   path: "/wishlists/:wishListId/wishlist_item/:id"
-  // }
-}
-
+    id: 'editWishList',
+    title: 'Редактирование WishList',
+    path: '/wishlists/:wishListId',
+  },
+};
 
 export default function AppRouter() {
   return (
@@ -85,19 +73,17 @@ export default function AppRouter() {
           <Route exact path={PAGES.howItWorks.path}>
             <PageHowItWorks />
           </Route>
-          <Route exact path={PAGES.wishList.path} >
+          <Route exact path={PAGES.wishList.path}>
             <PageHome />
           </Route>
-          <Route exact path={PAGES.signIn.path} >
+          <Route exact path={PAGES.signIn.path}>
             <PageSignIn />
           </Route>
-          <Route exact path={PAGES.newWishList.path} >
+          <Route exact path={PAGES.newWishList.path}>
             <PageNewWishList />
           </Route>
           <Route exact path={PAGES.editWishList.path}>
             <PageEditWishList />
-            {/* <Route exact path={PAGES.wishListItemAssignee.path}>
-              <PageEditWishList /> */}
           </Route>
         </Switch>
       </div>

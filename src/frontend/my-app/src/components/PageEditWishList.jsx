@@ -65,26 +65,46 @@ async function patchWishListItem(wishListId, wishListItemId, picture, title, com
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-// // DELETE удаление WishListItem
-// async function deleteWishListItem(wishListItemId, wishListId) {
-//   // Default options are marked with *
-//   const data = {}
-//   const url = `//api/wishlists/:${wishListId}/wishlist_item/${wishListItemId}`
-//   const response = await fetch(url, {
-//     method: 'DEL', // *GET, POST, PUT, DELETE, etc.
-//     mode: 'cors', // no-cors, *cors, same-origin
-//     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-//     credentials: 'same-origin', // include, *same-origin, omit
-//     headers: {
-//       'Content-Type': 'application/json'
-//       // 'Content-Type': 'application/x-www-form-urlencoded',
-//     },
-//     redirect: 'follow', // manual, *follow, error
-//     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-//     body: JSON.stringify(data) // body data type must match "Content-Type" header
-//   });
-//   return response.json(); // parses JSON response into native JavaScript objects
-// }
+async function postWishListItemAssignee(wishListId, wishListItemId, picture, title, comment, desireDegree, assigneeId) {
+  // Default options are marked with *
+  const data = { picture, title, comment, desireDegree, assigneeId };
+  const url = `/api/wishlists/${wishListId}/wishlist_item/${wishListItemId}`;
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data), // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+
+// DELETE удаление WishListItem
+async function deleteWishListItem(wishListItemId, wishListId) {
+  // Default options are marked with *
+  const data = {};
+  const url = `/api/wishlists/${wishListId}/wishlist_item/${wishListItemId}`;
+  const response = await fetch(url, {
+    method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data), // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
 
 // GET all WishListItem
 async function getAllWishListItems(wishListId) {
@@ -116,6 +136,7 @@ export default function EditWishList() {
   const [comment, setComment] = React.useState('');
   const [desireDegree, setDesireDegree] = React.useState('');
   const [wishListItemId, setWishListItemId] = React.useState('');
+  const [assigneeId, setAssigneeId] = React.useState('');
 
   React.useEffect(() => {
     const callGetAllWishListItems = async () => {
@@ -125,7 +146,7 @@ export default function EditWishList() {
     callGetAllWishListItems();
   }, []);
 
-  // Отправление POST запроса на сервер для редактирования WishList
+  // Отправление PATCH запроса на сервер для редактирования WishList
   const handleEditWishList = () => {
     patchWishList(wishListId);
   };
@@ -143,16 +164,17 @@ export default function EditWishList() {
     setDesireDegree(event.target.value);
   };
   const handleChangeWishListItemId = (event) => {
-    setDesireDegree(event.target.value);
+    setWishListItemId(event.target.value);
   };
-  // Отправление POST запроса на сервер для создания WishListItem
+
+  // Сохранение WishListItem
   const handleSaveWishListItem = async () => {
     if (!wishListItemId) {
       // Create
       await postNewWishListItem(wishListId, picture, title, comment, desireDegree);
     } else {
       // Update
-      await patchWishListItem(wishListId, wishListItemId, picture, title, comment, desireDegree);
+      await patchWishListItem(wishListId, wishListItemId, picture, title, comment, desireDegree, assigneeId);
     }
     const items = await getAllWishListItems(wishListId);
     setWishListItems(items);
@@ -161,7 +183,9 @@ export default function EditWishList() {
     setDesireDegree('');
     setPicture('');
     setWishListItemId('');
+    setAssigneeId('');
   };
+
   const handleClickEdit = (wishListItem) => () => {
     setWishListItemId(wishListItem._id);
     setTitle(wishListItem.title);
@@ -170,22 +194,29 @@ export default function EditWishList() {
     setPicture(wishListItem.picture);
   };
 
-  // // Редактирование WishListItem
-  // const [wishListItemId, setWishListItemId] = React.useState([WishListItem]);
-  // console.log(wishListItemId, wishListItemId)
-  // const handleListItemId = event => {
-  //   setWishListItemId(event.target.value);
-  // }
+  // Отправление DELETE запроса на сервер для удаления WishListItem
+  const handleClickDelete = (wishListItem) => async () => {
+    await deleteWishListItem(wishListItem._id, wishListId);
+    const items = await getAllWishListItems(wishListId);
+    setWishListItems(items);
+    setTitle('');
+    setComment('');
+    setDesireDegree('');
+    setPicture('');
+    setWishListItemId('');
+  };
 
-  // // отправление POST запроса для редактирования и подтверждения Assignee
-  // const handleUpdateWishListItem = () => {
-  //   patchWishListItem(wishListItemId, wishListId);
-  // };
-
-  // // Отправление DEL запроса на сервер для удаления WishListItem
-  // const handleDeleteWishListItem = () => {
-  //   deleteWishListItem(wishListItemId, wishListId);
-  // };
+  const handleClickAssignee = (wishListItem) => async () => {
+    await postWishListItemAssignee(
+      wishListId,
+      wishListItem._id,
+      wishListItem.picture,
+      wishListItem.title,
+      wishListItem.comment,
+      wishListItem.desireDegree,
+      wishListItem.assigneeId
+    );
+  };
 
   return (
     <React.Fragment>
@@ -247,27 +278,50 @@ export default function EditWishList() {
               <td>
                 <button onClick={handleSaveWishListItem}>Сохранить</button>
               </td>
-              <td>
-                <button /* onClick={handleDeleteWishListItem} */>Удалить</button>
-              </td>
+              {/* <td>
+                <button onClick={handleDeleteWishListItem}>Удалить</button>
+              </td> */}
             </tr>
+            {wishListItems.map((el) => (
+              <tr key={el._id} /* style={{ display: 'flex', marginTop: 6 }} */>
+                <td>
+                  <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
+                    <img width={150} alt="Желание" src={el.picture} />
+                  </div>
+                </td>
+                <td>
+                  <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>{el.title}</div>
+                </td>
+                <td>
+                  <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>{el.comment}</div>
+                </td>
+                <td>
+                  <div className="rating-area" style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
+                    {el.desireDegree}
+                  </div>
+                </td>
+                <td>
+                  <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
+                    <input type="checkbox" name="assignee" onClick={handleClickAssignee(el)} />
+                  </div>
+                </td>
+                <td>
+                  <input disabled={true} value={el._id} />
+                </td>
+                <td>
+                  <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
+                    <button onClick={handleClickEdit(el)}>Редактировать</button>
+                  </div>
+                </td>
+                <td>
+                  <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
+                    <button onClick={handleClickDelete(el)}>Удалить</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
-      </div>
-      <div>
-        {wishListItems.map((el) => (
-          <div key={el._id} style={{ display: 'flex', marginTop: 6 }}>
-            <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
-              <img width={150} src={el.picture} />
-            </div>
-            <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>{el.title}</div>
-            <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>{el.comment}</div>
-            <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>{el.desireDegree}</div>
-            <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
-              <button onClick={handleClickEdit(el)}>Edit</button>
-            </div>
-          </div>
-        ))}
       </div>
     </React.Fragment>
   );

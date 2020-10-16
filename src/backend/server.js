@@ -174,11 +174,10 @@ app.post("/api/wishlists", async function (req, res) {
 
 app.patch("/api/wishlists/:wish_list_id", async function (req, res) {
   const wishListId = req.params.wish_list_id;
-  const { ownerId } = req.body;
-  const status = 'edit'
+  // const { ownerId, status } = req.body;
   const result = await WishList.update(
     { _id: wishListId },
-    { ownerId, status }
+    // { ownerId, status }
   );
   res.json(result);
 });
@@ -212,6 +211,16 @@ app.post("/api/wishlists/:wish_list_id/wishlist_item", async (req, res) => {
 
 // Редактирование WishListItem
 app.patch("/api/wishlists/:wish_list_id/wishlist_item/:id", async function (req, res) {
+  const id = req.params.id;
+  const { picture, title, comment, desireDegree } = req.body;
+  const result = await WishListItem.update(
+    { _id: id },
+    { title, comment, desireDegree, picture }
+  );
+  res.send(result);
+});
+
+app.post("/api/wishlists/:wish_list_id/wishlist_item/:id", async function (req, res) {
   const id = req.params.id;
   const { picture, title, comment, desireDegree } = req.body;
   const assigneeId = curentUserId;
