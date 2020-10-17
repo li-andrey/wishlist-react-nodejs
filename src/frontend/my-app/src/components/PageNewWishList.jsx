@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 async function postWishList() {
   // Default options are marked with *
@@ -21,8 +22,11 @@ async function postWishList() {
 }
 
 export default function NewWishList() {
-  const handleNewWishList = () => {
-    postWishList();
+  const history = useHistory();
+
+  const handleNewWishList = async () => {
+    const newWishList = await postWishList();
+    history.push(`/wishlists/${newWishList._id}`);
   };
 
   return (

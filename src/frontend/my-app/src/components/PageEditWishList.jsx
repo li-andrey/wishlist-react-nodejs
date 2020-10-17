@@ -65,12 +65,20 @@ async function patchWishListItem(wishListId, wishListItemId, picture, title, com
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-async function postWishListItemAssignee(wishListId, wishListItemId, picture, title, comment, desireDegree, assigneeId) {
+async function patchWishListItemAssignee(
+  wishListId,
+  wishListItemId,
+  picture,
+  title,
+  comment,
+  desireDegree,
+  assigneeId
+) {
   // Default options are marked with *
   const data = { picture, title, comment, desireDegree, assigneeId };
-  const url = `/api/wishlists/${wishListId}/wishlist_item/${wishListItemId}`;
+  const url = `/api/wishlists/${wishListId}/wishlist_item/${wishListItemId}/set_assignee`;
   const response = await fetch(url, {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
     credentials: 'same-origin', // include, *same-origin, omit
@@ -207,7 +215,7 @@ export default function EditWishList() {
   };
 
   const handleClickAssignee = (wishListItem) => async () => {
-    await postWishListItemAssignee(
+    await patchWishListItemAssignee(
       wishListId,
       wishListItem._id,
       wishListItem.picture,

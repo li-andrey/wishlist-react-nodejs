@@ -1,12 +1,11 @@
 const express = require("express");
-// const bcrypt = require('bcryptjs');
-// const { check, validationResult } = require('express-validator')
-// const jwt = require('jsonwebtoken');
-
+const bcrypt = require('bcryptjs');
+const { check, validationResult } = require('express-validator')
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const port = 3100;
-// const jwtSecret = 'showone production';
+const jwtSecret = 'showone production';
 app.use(express.json());
 const mongoose = require("mongoose");
 const url = `mongodb+srv://new:asdw34vD@cluster0.any1t.mongodb.net/test?retryWrites=true&w=majority`;
@@ -29,7 +28,6 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  resetToken: String,
   avatarUrl: String,
 });
 
@@ -73,41 +71,41 @@ app.get("/api/users", async function (req, res) {
 });
 
 // Регистрация пользователя
-// app.post(
-//   "/api/registration",
-//   [
-//     check('email', 'Некорректный email').isEmail(),
-//     check('password', 'Минимальная длина пароля 6 символов').isLength({ min: 6 })
-//   ],
-//   async function (req, res) {
-//     try {
-//       const errors = validationResult(req)
-//       if (!errors.isEmpty()) {
-//         return res.status(400).json({
-//           errors: errors.array(),
-//           message: 'Некорректные данные при регистраци'
-//         })
-//       }
-//       const body = req.body
-//       const candidate = await User.findOne({ email: email })
-//       if (candidate) {
-//         return res.status(400).json({ message: 'Такой пользователь уже существует' })
-//       }
-//       const hashedPassword = await bcrypt.hash(password, 12)
-//       const user = new User({
-//         name: body.name,
-//         email: body.email,
-//         password: hashedPassword,
-//         avatarUrl: body.avatarUrl,
-//       });
-//       const savedUser = await user.save();
-//       res.status(201).json({ message: 'Пользователь создан', savedUser });
-//     }
-//     catch (error) {
-//       res.status(500).json({ message: 'Что-то пошло не так' })
-//     }
-//   }
-// )
+app.post(
+  "/api/registration",
+  [
+    check('email', 'Некорректный email').isEmail(),
+    check('password', 'Минимальная длина пароля 6 символов').isLength({ min: 6 })
+  ],
+  async function (req, res) {
+    try {
+      const errors = validationResult(req)
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          errors: errors.array(),
+          message: 'Некорректные данные при регистраци'
+        })
+      }
+      const { name, email, password, avatarUrl } = req.body
+      const candidate = await User.findOne({ email })
+      if (candidate) {
+        return res.status(400).json({ message: 'Такой пользователь уже существует' })
+      }
+      const hashedPassword = await bcrypt.hash(password, 12)
+      const user = new User({
+        name,
+        email,
+        password: hashedPassword,
+        avatarUrl
+      });
+      await user.save();
+      res.status(201).json({ message: 'Пользователь создан' });
+    }
+    catch (error) {
+      res.status(500).json({ message: 'Что-то пошло не так' })
+    }
+  }
+)
 
 
 // // Вход в систему
@@ -220,7 +218,8 @@ app.patch("/api/wishlists/:wish_list_id/wishlist_item/:id", async function (req,
   res.send(result);
 });
 
-app.post("/api/wishlists/:wish_list_id/wishlist_item/:id", async function (req, res) {
+// Редактирование WishListItem назначение Assignee
+app.patch("/api/wishlists/:wish_list_id/wishlist_item/:id/set_assignee", async function (req, res) {
   const id = req.params.id;
   const { picture, title, comment, desireDegree } = req.body;
   const assigneeId = curentUserId;
