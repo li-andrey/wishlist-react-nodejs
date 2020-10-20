@@ -1,9 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import '../css/desireDegree.css';
+import '../../css/desireDegree.css';
 
 // PATCH редактирования WishList
-async function patchWishList(wishListId) {
+/* async function patchWishList(wishListId) {
   // Default options are marked with *
   const data = {};
   const url = `/api/wishlists/${wishListId}`;
@@ -22,7 +22,7 @@ async function patchWishList(wishListId) {
   });
   return response.json(); // parses JSON response into native JavaScript objects
 }
-
+ */
 // POST добавление WishListItem
 async function postNewWishListItem(wishListId, picture, title, comment, desireDegree) {
   // Default options are marked with *
@@ -155,9 +155,9 @@ export default function EditWishList() {
   }, []);
 
   // Отправление PATCH запроса на сервер для редактирования WishList
-  const handleEditWishList = () => {
+  /*   const handleEditWishList = () => {
     patchWishList(wishListId);
-  };
+  }; */
   // Добавление нового WishListItem
   const handlePicture = (event) => {
     setPicture(event.target.value);
@@ -228,12 +228,14 @@ export default function EditWishList() {
 
   return (
     <React.Fragment>
-      <h1> Редактировать WishList </h1>
+      <h1> Andrey's WishList </h1>
       <div>
-        <button onClick={handleEditWishList}>Редактировать</button>
+        {/*         <button className="btn1" onClick={handleEditWishList}>
+          Редактировать
+        </button> */}
       </div>
-      <div>
-        <table>
+      <div class="table-container">
+        <table width="100%">
           <tbody>
             <tr>
               <th>Картинка</th>
@@ -246,6 +248,7 @@ export default function EditWishList() {
             <tr>
               <td>
                 <input
+                  className="inputItem"
                   placeholder="Здесь нужно указать адрес картинки желаемого подарка в интернете"
                   onChange={handlePicture}
                   value={picture}
@@ -253,6 +256,7 @@ export default function EditWishList() {
               </td>
               <td>
                 <input
+                  className="inputItem"
                   placeholder="Например: Iphone 12 PRO на 128 GB в синем цвете"
                   onChange={handleTitle}
                   value={title}
@@ -260,6 +264,7 @@ export default function EditWishList() {
               </td>
               <td>
                 <input
+                  className="inputItem"
                   placeholder="Расскажите о каких-то особенностях продукта, сфере его применения или любую другую информацию, которая поможет выбрать правильный подарок"
                   onChange={handleComment}
                   value={comment}
@@ -281,10 +286,17 @@ export default function EditWishList() {
                 <input type="checkbox" /*  onClick={handleUpdateWishListItem}  */ />
               </td>
               <td>
-                <input disabled={true} onChange={handleChangeWishListItemId} value={wishListItemId} />
+                <input
+                  className="inputItem"
+                  disabled={true}
+                  onChange={handleChangeWishListItemId}
+                  value={wishListItemId}
+                />
               </td>
               <td>
-                <button onClick={handleSaveWishListItem}>Сохранить</button>
+                <button className="btn1" onClick={handleSaveWishListItem}>
+                  Сохранить
+                </button>
               </td>
               {/* <td>
                 <button onClick={handleDeleteWishListItem}>Удалить</button>
@@ -314,16 +326,20 @@ export default function EditWishList() {
                   </div>
                 </td>
                 <td>
-                  <input disabled={true} value={el._id} />
+                  <input className="inputItem" disabled={true} value={el._id} />
                 </td>
                 <td>
                   <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
-                    <button onClick={handleClickEdit(el)}>Редактировать</button>
+                    <button className="btn1" onClick={handleClickEdit(el)}>
+                      Редактировать
+                    </button>
                   </div>
                 </td>
                 <td>
                   <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
-                    <button onClick={handleClickDelete(el)}>Удалить</button>
+                    <button className="btn1" onClick={handleClickDelete(el)}>
+                      Удалить
+                    </button>
                   </div>
                 </td>
               </tr>

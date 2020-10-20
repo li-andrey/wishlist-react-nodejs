@@ -28,7 +28,6 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  avatarUrl: String,
 });
 
 const User = mongoose.model("User", userSchema);
@@ -60,9 +59,9 @@ const wishListItemSchema = new mongoose.Schema({
 
 const WishListItem = mongoose.model("WishListItem", wishListItemSchema);
 
-app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/questionnaire.html");
-});
+// app.get("/", function (req, res) {
+//   res.sendFile(__dirname + "/questionnaire.html");
+// });
 
 // Получение списка всех пользователей
 app.get("/api/users", async function (req, res) {
@@ -75,10 +74,10 @@ app.post(
   "/api/registration",
   [
     check('email', 'Некорректный email').isEmail(),
-    check('password', 'Минимальная длина пароля 6 символов').isLength({ min: 6 })
   ],
   async function (req, res) {
     try {
+      console.log('Body:', req.body)
       const errors = validationResult(req)
       if (!errors.isEmpty()) {
         return res.status(400).json({
@@ -86,7 +85,7 @@ app.post(
           message: 'Некорректные данные при регистраци'
         })
       }
-      const { name, email, password, avatarUrl } = req.body
+      const { name, email, password } = req.body
       const candidate = await User.findOne({ email })
       if (candidate) {
         return res.status(400).json({ message: 'Такой пользователь уже существует' })
@@ -95,8 +94,7 @@ app.post(
       const user = new User({
         name,
         email,
-        password: hashedPassword,
-        avatarUrl
+        password: hashedPassword
       });
       await user.save();
       res.status(201).json({ message: 'Пользователь создан' });
@@ -108,47 +106,48 @@ app.post(
 )
 
 
-// // Вход в систему
-// app.post(
-//   "/api/sign_in/:id",
-//   [
-//     check('email', 'Введите корректный email').isEmail().normalizeEmail(),
-//     check('password', 'Введите пароль').exists()
-//   ],
-//   async function (req, res) {
-//     try {
-//       const errors = validationResult(req)
-//       if (!errors.isEmpty()) {
-//         return res.status(400).json({
-//           errors: errors.array(),
-//           message: 'Некорректные данные при регистраци'
-//         })
-//       }
-//       const body = req.body
-//       const user = await User.findOne({ email })
-//       if (!user) {
-//         return res.status(400).json({ message: 'Пользователь не найден' })
-//       }
-//       const isMatch = await bcrypt.compare(password, user.password)
-//       if (!isMatch) {
-//         return res.status(400).json({ message: 'Неверный пароль, попробуйте снова' })
-//       }
-//       const token = jwt.sign(
-//         { userId: user.id },
-//         jwtSecret,
-//         { expiresIn: '1h' }
-//       )
-//       res.json({ token, userId: user.id })
+// Вход в систему
+app.post(
+  "/api/login",
+  [
+    check('email', 'Введите корректный email').isEmail().normalizeEmail(),
+    check('password', 'Введите пароль').exists()
+  ],
+  async function (req, res) {
+    try {
+      const errors = validationResult(req)
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          errors: errors.array(),
+          message: 'Некорректные данные при регистраци'
+        })
+      }
+      const { email, password } = req.body
+      const user = await User.findOne({ email })
+      if (!user) {
+        return res.status(400).json({ message: 'Пользователь не найден' })
+      }
+      const isMatch = await bcrypt.compare(password, user.password)
+      if (!isMatch) {
+        return res.status(400).json({ message: 'Неверный пароль, попробуйте снова' })
+      }
+      const token = jwt.sign(
+        { userId: user.id },
+        jwtSecret,
+        { expiresIn: '1h' }
+      )
+      res.json({ token, userId: user.id })
 
-//     } catch (error) {
-//       res.status(500).json({ message: 'Что-то пошло не так' })
-//     }
-//   })
+    } catch (error) {
+      res.status(500).json({ message: 'Что-то пошло не так' })
+    }
+  })
 
-app.post("/api/sign_in/:id", function (req, res) {
-  curentUserId = req.params.id;
-  res.json({ curentUserId })
-});
+
+// app.post("/api/sign_in/:id", function (req, res) {
+//   curentUserId = req.params.id;
+//   res.json({ curentUserId })
+// });
 
 // Получение списка всех WishLists
 app.get("/api/wishlists", async function (req, res) {

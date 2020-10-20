@@ -1,13 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import PageHowItWorks from './PageHowItWorks';
-import PageAbout from './PageAbout';
-import PageHome from './PageHome';
-import PageSignIn from './PageSignIn';
-import PageNewWishList from './PageNewWishList';
-import PageEditWishList from './PageEditWishList';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
-const PAGES = {
+import PageHowItWorks from './Pages/PageHowItWorks';
+import PageAbout from './Pages/PageAbout';
+import PageHome from './Pages/PageHome';
+import PageNewWishList from './Pages/PageNewWishList';
+import PageEditWishList from './Pages/PageEditWishList';
+import PageAuth from './Pages/PageAuth';
+
+export const PAGES = {
   wishList: {
     id: 'wishList',
     title: 'My WishList',
@@ -23,11 +24,6 @@ const PAGES = {
     title: 'Как это работает',
     path: '/how_it_works',
   },
-  signIn: {
-    id: 'signIn',
-    title: 'Авторизация',
-    path: '/sign_in',
-  },
   newWishList: {
     id: 'newWishList',
     title: 'Создать свой WishList',
@@ -40,53 +36,35 @@ const PAGES = {
   },
 };
 
-export default function AppRouter() {
+export const AppRouter = (isAuthenticated) => {
+  if (isAuthenticated) {
+    return (
+      <Switch>
+        <Route exact path={PAGES.about.path}>
+          <PageAbout />
+        </Route>
+        <Route exact path={PAGES.howItWorks.path}>
+          <PageHowItWorks />
+        </Route>
+        <Route exact path={PAGES.wishList.path}>
+          <PageHome />
+        </Route>
+        <Route exact path={PAGES.newWishList.path}>
+          <PageNewWishList />
+        </Route>
+        <Route exact path={PAGES.editWishList.path}>
+          <PageEditWishList />
+        </Route>
+        <Redirect to={PAGES.wishList.path} />
+      </Switch>
+    );
+  }
   return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to={PAGES.wishList.path}> {PAGES.wishList.title} </Link>
-            </li>
-            <li>
-              <Link to={PAGES.about.path}> {PAGES.about.title} </Link>
-            </li>
-            <li>
-              <Link to={PAGES.howItWorks.path}> {PAGES.howItWorks.title} </Link>
-            </li>
-            <li>
-              <Link to={PAGES.signIn.path}> {PAGES.signIn.title} </Link>
-            </li>
-            <li>
-              <Link to={PAGES.newWishList.path}> {PAGES.newWishList.title} </Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route exact path={PAGES.about.path}>
-            <PageAbout />
-          </Route>
-          <Route exact path={PAGES.howItWorks.path}>
-            <PageHowItWorks />
-          </Route>
-          <Route exact path={PAGES.wishList.path}>
-            <PageHome />
-          </Route>
-          <Route exact path={PAGES.signIn.path}>
-            <PageSignIn />
-          </Route>
-          <Route exact path={PAGES.newWishList.path}>
-            <PageNewWishList />
-          </Route>
-          <Route exact path={PAGES.editWishList.path}>
-            <PageEditWishList />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <Switch>
+      <Route path={PAGES.wishList.path} exact>
+        <PageAuth />
+      </Route>
+      <Redirect to={PAGES.wishList.path} />
+    </Switch>
   );
-}
+};
