@@ -65,6 +65,7 @@ async function patchWishListItem(wishListId, wishListItemId, picture, title, com
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
+// PATCH определение Assignee для WishListItem
 async function patchWishListItemAssignee(
   wishListId,
   wishListItemId,
@@ -152,7 +153,7 @@ export default function EditWishList() {
       setWishListItems(items);
     };
     callGetAllWishListItems();
-  }, []);
+  }, [wishListId]);
 
   // Отправление PATCH запроса на сервер для редактирования WishList
   /*   const handleEditWishList = () => {

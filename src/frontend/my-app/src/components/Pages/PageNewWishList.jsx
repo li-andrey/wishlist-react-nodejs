@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
-async function postWishList() {
+async function postWishList(userId) {
   // Default options are marked with *
-  const data = {};
+  const data = { userId };
   const url = '/api/wishlists';
   const response = await fetch(url, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -23,9 +24,11 @@ async function postWishList() {
 
 export default function NewWishList() {
   const history = useHistory();
+  const auth = useContext(AuthContext);
+  const userId = auth.userId;
 
   const handleNewWishList = async () => {
-    const newWishList = await postWishList();
+    const newWishList = await postWishList(userId);
     history.push(`/wishlists/${newWishList._id}`);
   };
 

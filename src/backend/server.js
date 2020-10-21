@@ -22,7 +22,6 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-let curentUserId = "5f816f038768713dd5161668"
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -58,6 +57,8 @@ const wishListItemSchema = new mongoose.Schema({
 });
 
 const WishListItem = mongoose.model("WishListItem", wishListItemSchema);
+
+let curentUserId = "5f816f038768713dd5161668"
 
 // app.get("/", function (req, res) {
 //   res.sendFile(__dirname + "/questionnaire.html");
@@ -149,6 +150,7 @@ app.post(
 //   res.json({ curentUserId })
 // });
 
+
 // Получение списка всех WishLists
 app.get("/api/wishlists", async function (req, res) {
   const wishLists = await WishList.find({});
@@ -158,17 +160,18 @@ app.get("/api/wishlists", async function (req, res) {
 
 // Создание нового WishList
 app.post("/api/wishlists", async function (req, res) {
-  const body = req.body;
+  const curentUserId = req.body.userId
+  console.log(111111111, curentUserId)
   const wishList = new WishList({
     ownerId: curentUserId,
-    status: 'new',
+    status: 'b'
   });
   const savedWishList = await wishList.save();
   res.json(savedWishList);
 });
 
-// Редактирование WishList 
 
+// Редактирование WishList 
 app.patch("/api/wishlists/:wish_list_id", async function (req, res) {
   const wishListId = req.params.wish_list_id;
   // const { ownerId, status } = req.body;

@@ -72,11 +72,11 @@ export default function PageAuth() {
           <label htmlFor='name'> Имя </label>
         </div>
         <div>
-          <input className='inputAuth' placeholder='Введите email' id='email' type='text' name='email' onChange={changeHandler} />
+          <input className='inputAuth' placeholder='Введите email' id='email' type='text' name='email' value={form.email} onChange={changeHandler} />
           <label htmlFor='email'> Email </label>
         </div>
         <div>
-          <input className='inputAuth' placeholder='Введите пароль' id='password' type='password' name='password' onChange={changeHandler} />
+          <input className='inputAuth' placeholder='Введите пароль' id='password' type='password' name='password' value={form.password} onChange={changeHandler} />
           <label htmlFor='password'> Пароль </label>
         </div>
         <div>

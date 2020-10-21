@@ -11,7 +11,7 @@ import PageAuth from './Pages/PageAuth';
 export const PAGES = {
   wishList: {
     id: 'wishList',
-    title: 'My WishList',
+    title: 'Главная',
     path: '/',
   },
   about: {

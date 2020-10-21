@@ -14,10 +14,10 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ token, login, logout, userId, isAuthenticated }}>
       <Router>
-        <div class="wrapper">
+        <div className="wrapper">
           {isAuthenticated && <Navibar />}
           <div className="content">{routes}</div>
-          <div class="footer">
+          <div className="footer">
             <p>
               <a href="mailto:EZaykovskiy@mail.ru">EZaykovskiy@mail.ru</a>, 2020
             </p>
