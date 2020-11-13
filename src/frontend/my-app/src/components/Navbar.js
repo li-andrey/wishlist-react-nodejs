@@ -17,13 +17,12 @@ export const Navibar = () => {
 
   return (
     <Navbar className='navibar' collapseOnSelect expand='md' >
-      <Navbar.Brand> MyWishList </Navbar.Brand>
+      {/*  <Navbar.Brand> MyWishList </Navbar.Brand> */}
       <Navbar.Toggle aria-controls='responsive-navbar-nav' />
       <Navbar.Collapse id='responsive-navbar-nav'>
         <Nav className='mr-auto'>
-          <Nav.Link><Link to={PAGES.wishList.path}> {PAGES.wishList.title} </Link></Nav.Link>
           <Nav.Link>
-            <Link to={PAGES.about.path}> {PAGES.about.title} </Link>
+            <Link to={PAGES.wishList.path}> {PAGES.wishList.title} </Link>
           </Nav.Link>
           <Nav.Link>
             <Link to={PAGES.howItWorks.path}> {PAGES.howItWorks.title} </Link>

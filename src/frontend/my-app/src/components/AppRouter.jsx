@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-
 import PageHowItWorks from './Pages/PageHowItWorks';
-import PageAbout from './Pages/PageAbout';
 import PageHome from './Pages/PageHome';
 import PageNewWishList from './Pages/PageNewWishList';
 import PageEditWishList from './Pages/PageEditWishList';
@@ -13,11 +11,6 @@ export const PAGES = {
     id: 'wishList',
     title: 'Главная',
     path: '/',
-  },
-  about: {
-    id: 'about',
-    title: 'Немного о нас',
-    path: '/about',
   },
   howItWorks: {
     id: 'howItWorks',
@@ -40,9 +33,6 @@ export const AppRouter = (isAuthenticated) => {
   if (isAuthenticated) {
     return (
       <Switch>
-        <Route exact path={PAGES.about.path}>
-          <PageAbout />
-        </Route>
         <Route exact path={PAGES.howItWorks.path}>
           <PageHowItWorks />
         </Route>

@@ -32,6 +32,7 @@ body {
 }
 
 .nav-link {
+  font-size: 18px;
   padding: 0.25rem 0;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.5);
@@ -51,14 +52,21 @@ body {
 }
 
 .main_h1 {
-  margin-top: 10%;
-  margin-bottom: 5%;
+  margin-top: 5%;
+  margin-bottom: 3%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.main_h2 {
+  margin-top: 2%;
+  margin-bottom: 1%;
   margin-left: 20%;
   margin-right: 20%;
 }
 
 .inputID {
-  width: 275px;
+  width: 450px;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
@@ -67,14 +75,15 @@ body {
   background-image: url();
   background-position: 10px 10px;
   background-repeat: no-repeat;
-  padding: 12px 20px 12px 40px;
+  padding: 12px 20px 12px 30px;
   transition: width 0.4s ease-in-out;
   border-radius: 40px;
   font-weight: 600;
+  margin: 10px;
 }
 
 .inputID:focus {
-  width: 40%;
+  width: 35%;
 }
 
 .inputItem {
@@ -126,6 +135,15 @@ body {
   overflow-y: auto;
   _overflow: auto;
   margin: 0 0 1em;
+}
+
+.table1 {
+  margin: auto;
+}
+
+.wishlist_id {
+  padding-left: 30px;
+  text-align: left;
 }
 
 h1 {

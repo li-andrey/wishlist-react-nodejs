@@ -42,21 +42,28 @@ export default function PageHome() {
   return (
     <React.Fragment>
       <div className="cover">
-        <h1 className="main_h1">Friend's WishList - это уютный сервис для помощи в подборе подарков своим друзьям</h1>
-        <input className="inputID" placeholder="Введите номер WishList вашего друга" onChange={handleWishListId} />
+        <h1 className="main_h1">Friend's WishList - это уютный сервис для помощи в подборе подарков своим близким</h1>
+        <input
+          className="inputID"
+          placeholder="Введите идентификационный номер вашего друга"
+          onChange={handleWishListId}
+        />
         <button className="btn1" onClick={handleWishList}>
           Найти
         </button>
+        <h2 className="main_h2">Идентификационный номер можно найти в списке ниже:</h2>
       </div>
       <div>
-        <table>
+        <table className="table1">
           {wishLists.map((el) => (
             <tr key={el._id} /* style={{ display: 'flex', marginTop: 6 }} */>
               <td>
-                <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>{el._id}</div>
+                <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>{el.ownerId}</div>
               </td>
               <td>
-                <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>{el.ownerId}</div>
+                <div className="wishlist_id" style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
+                  {el._id}
+                </div>
               </td>
             </tr>
           ))}

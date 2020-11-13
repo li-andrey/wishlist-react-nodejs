@@ -69,7 +69,7 @@ export default function PageAuth() {
       <div className='auth'>
         <div>
           <input className='inputAuth' placeholder='Введите ФИО' id='name' type='text' name='name' onChange={changeHandler} />
-          <label htmlFor='name'> Имя </label>
+          <label htmlFor='name'> ФИО </label>
         </div>
         <div>
           <input className='inputAuth' placeholder='Введите email' id='email' type='text' name='email' value={form.email} onChange={changeHandler} />
