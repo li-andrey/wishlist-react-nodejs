@@ -32,9 +32,9 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 const wishListSchema = new mongoose.Schema({
-  ownerId: {
+  owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Users",
+    ref: "User",
   },
   status: String,
 });
@@ -153,7 +153,8 @@ app.post(
 
 // Получение списка всех WishLists
 app.get("/api/wishlists", async function (req, res) {
-  const wishLists = await WishList.find({});
+  const wishLists = await WishList.find({}).populate('owner');
+  console.log("wishlist", wishLists)
   res.json(wishLists);
 });
 
@@ -163,7 +164,7 @@ app.post("/api/wishlists", async function (req, res) {
   const curentUserId = req.body.userId
   console.log(111111111, curentUserId)
   const wishList = new WishList({
-    ownerId: curentUserId,
+    owner: curentUserId,
     status: 'b'
   });
   const savedWishList = await wishList.save();
