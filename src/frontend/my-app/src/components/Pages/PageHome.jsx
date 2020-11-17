@@ -23,7 +23,6 @@ export default function PageHome() {
   const [wishListId, setWishListId] = React.useState('');
 
   const [wishLists, setWishLists] = React.useState([]);
-  console.log('wishLists', wishLists);
 
   React.useEffect(() => {
     const callGetAllWishLists = async () => {
