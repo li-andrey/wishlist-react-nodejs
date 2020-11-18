@@ -42,6 +42,9 @@ export default function PageHome() {
     <React.Fragment>
       <div className="cover">
         <h1 className="main_h1">Friend's WishList - это уютный сервис для помощи в подборе подарков своим близким</h1>
+        <h2 className="main_h2">
+          Чтобы найти свой WishList или WishList друга, введите соответсвующий идентификационный номер
+        </h2>
         <input
           className="inputID"
           placeholder="Введите идентификационный номер вашего друга"

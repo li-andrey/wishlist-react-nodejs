@@ -284,7 +284,7 @@ export default function EditWishList() {
                 <label htmlFor="star-1" title="Оценка «1»" />
               </td>
               <td>
-                <input type="checkbox" /*  onClick={handleUpdateWishListItem}  */ />
+                <input type="checkbox" />
               </td>
               <td>
                 <input
@@ -299,9 +299,6 @@ export default function EditWishList() {
                   Сохранить
                 </button>
               </td>
-              {/* <td>
-                <button onClick={handleDeleteWishListItem}>Удалить</button>
-              </td> */}
             </tr>
             {wishListItems.map((el) => (
               <tr key={el._id} /* style={{ display: 'flex', marginTop: 6 }} */>

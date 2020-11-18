@@ -1,0 +1,11 @@
+{
+  "copyFilesSettings": {
+    "whenFileExists": "overwrite"
+  },
+  "copyFiles": [
+    {
+      "from": "./build/**/*",
+      "to": "../../backend/build/"
+    }
+  ]
+}

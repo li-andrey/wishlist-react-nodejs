@@ -2,6 +2,8 @@ const express = require("express");
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken');
+const path = require('path')
+const router = express.Router();
 
 const app = express();
 const port = 3100;
@@ -154,7 +156,6 @@ app.post(
 // Получение списка всех WishLists
 app.get("/api/wishlists", async function (req, res) {
   const wishLists = await WishList.find({}).populate('owner');
-  console.log("wishlist", wishLists)
   res.json(wishLists);
 });
 
@@ -239,6 +240,13 @@ app.delete("/api/wishlists/:wish_list_id/wishlist_item/:id", async function (req
   const result = await WishListItem.deleteOne({ _id: id });
   res.send(result);
 });
+
+
+app.get('/how_it_works.html', function (req, res) {
+  res.sendFile(path.join(__dirname + '/build/how_it_works.html'));
+});
+
+app.use(express.static(path.join(__dirname, 'build')))
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

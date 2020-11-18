@@ -15,7 +15,7 @@ export const PAGES = {
   howItWorks: {
     id: 'howItWorks',
     title: 'Как это работает',
-    path: '/how_it_works',
+    path: '/how_it_works.html',
   },
   newWishList: {
     id: 'newWishList',
