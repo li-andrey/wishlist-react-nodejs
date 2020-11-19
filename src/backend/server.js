@@ -241,9 +241,8 @@ app.delete("/api/wishlists/:wish_list_id/wishlist_item/:id", async function (req
   res.send(result);
 });
 
-
 app.get('/how_it_works.html', function (req, res) {
-  res.sendFile(path.join(__dirname + '/build/how_it_works.html'));
+  res.sendFile(path.join(__dirname + '/build/index.html'));
 });
 
 app.use(express.static(path.join(__dirname, 'build')))
