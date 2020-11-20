@@ -27,9 +27,15 @@ export const PAGES = {
     title: 'Редактирование WishList',
     path: '/wishlists/:wishListId',
   },
+  pageAuth: {
+    id: 'pageAuth',
+    title: 'Авторизация',
+    path: '/',
+  },
 };
 
 export const AppRouter = (isAuthenticated) => {
+  console.log('123', isAuthenticated);
   if (isAuthenticated) {
     return (
       <Switch>
@@ -45,16 +51,16 @@ export const AppRouter = (isAuthenticated) => {
         <Route exact path={PAGES.editWishList.path}>
           <PageEditWishList />
         </Route>
-        <Redirect to={PAGES.wishList.path} />
+        {/*       <Redirect to={PAGES.wishList.path} /> */}
       </Switch>
     );
   }
   return (
     <Switch>
-      <Route path={PAGES.wishList.path} exact>
+      <Route path={PAGES.pageAuth.path} exact>
         <PageAuth />
       </Route>
-      <Redirect to={PAGES.wishList.path} />
+      {/* <Redirect to={PAGES.wishList.path} /> */}
     </Switch>
   );
 };

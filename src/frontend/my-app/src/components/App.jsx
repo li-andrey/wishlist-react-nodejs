@@ -9,6 +9,7 @@ import '../index.css';
 
 export default function App() {
   const { token, login, logout, userId } = useAuth();
+  console.log('321', token);
   const isAuthenticated = !!token;
   const routes = AppRouter(isAuthenticated);
   return (
