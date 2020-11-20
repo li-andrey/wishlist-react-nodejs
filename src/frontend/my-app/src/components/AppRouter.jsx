@@ -60,7 +60,11 @@ export const AppRouter = (isAuthenticated) => {
       <Route path={PAGES.pageAuth.path} exact>
         <PageAuth />
       </Route>
+<<<<<<< HEAD
       {/* <Redirect to={PAGES.wishList.path} /> */}
+=======
+      {/*<Redirect to={PAGES.wishList.path} />*/}
+>>>>>>> 9ba6e28fefb24d90b036b7f98ecd4322d1c05b09
     </Switch>
   );
 };

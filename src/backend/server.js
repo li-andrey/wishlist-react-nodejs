@@ -241,10 +241,16 @@ app.delete("/api/wishlists/:wish_list_id/wishlist_item/:id", async function (req
   res.send(result);
 });
 
+<<<<<<< HEAD
 
 /* app.get('/how_it_works.html', function (req, res) {
   res.sendFile(path.join(__dirname + '/build/how_it_works.html'));
 }); */
+=======
+app.get('/how_it_works.html', function (req, res) {
+  res.sendFile(path.join(__dirname + '/build/index.html'));
+});
+>>>>>>> 9ba6e28fefb24d90b036b7f98ecd4322d1c05b09
 
 app.use(express.static(path.join(__dirname, 'build')))
 
