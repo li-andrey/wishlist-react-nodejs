@@ -62,10 +62,6 @@ const WishListItem = mongoose.model("WishListItem", wishListItemSchema);
 
 let curentUserId = "5f816f038768713dd5161668"
 
-// app.get("/", function (req, res) {
-//   res.sendFile(__dirname + "/questionnaire.html");
-// });
-
 // Получение списка всех пользователей
 app.get("/api/users", async function (req, res) {
   const users = await User.find({});
@@ -159,6 +155,11 @@ app.get("/api/wishlists", async function (req, res) {
   res.json(wishLists);
 });
 
+// Получение WishList
+app.get("/api/wishlist", async function (req, res) {
+  const wishLists = await WishList.findOne({}).populate('owner');
+  res.json(wishLists);
+});
 
 // Создание нового WishList
 app.post("/api/wishlists", async function (req, res) {
@@ -241,16 +242,13 @@ app.delete("/api/wishlists/:wish_list_id/wishlist_item/:id", async function (req
   res.send(result);
 });
 
-<<<<<<< HEAD
-
-/* app.get('/how_it_works.html', function (req, res) {
-  res.sendFile(path.join(__dirname + '/build/how_it_works.html'));
-}); */
-=======
-app.get('/how_it_works.html', function (req, res) {
+app.get('/how_it_works', function (req, res) {
   res.sendFile(path.join(__dirname + '/build/index.html'));
 });
->>>>>>> 9ba6e28fefb24d90b036b7f98ecd4322d1c05b09
+
+app.get('/wishlists', function (req, res) {
+  res.sendFile(path.join(__dirname + '/build/index.html'));
+});
 
 app.use(express.static(path.join(__dirname, 'build')))
 

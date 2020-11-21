@@ -5,7 +5,7 @@
   "copyFiles": [
     {
       "from": "./build/**/*",
-      "to": "../../backend/build/"
+      "to": "../../../../wishlist_backend/build/"
     }
   ]
 }

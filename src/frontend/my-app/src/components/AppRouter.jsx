@@ -15,7 +15,7 @@ export const PAGES = {
   howItWorks: {
     id: 'howItWorks',
     title: 'Как это работает',
-    path: '/how_it_works.html',
+    path: '/how_it_works',
   },
   newWishList: {
     id: 'newWishList',
@@ -35,7 +35,6 @@ export const PAGES = {
 };
 
 export const AppRouter = (isAuthenticated) => {
-  console.log('123', isAuthenticated);
   if (isAuthenticated) {
     return (
       <Switch>
@@ -60,11 +59,7 @@ export const AppRouter = (isAuthenticated) => {
       <Route path={PAGES.pageAuth.path} exact>
         <PageAuth />
       </Route>
-<<<<<<< HEAD
-      {/* <Redirect to={PAGES.wishList.path} /> */}
-=======
       {/*<Redirect to={PAGES.wishList.path} />*/}
->>>>>>> 9ba6e28fefb24d90b036b7f98ecd4322d1c05b09
     </Switch>
   );
 };
