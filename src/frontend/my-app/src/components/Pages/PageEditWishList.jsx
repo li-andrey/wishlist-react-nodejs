@@ -177,7 +177,6 @@ export default function EditWishList() {
     const callGetAllWishListItems = async () => {
       const items = await getAllWishListItems(wishListId);
       setWishListItems(items);
-      if (wishList.assigneeId != 0) document.getElementById('assignee').disabled = true;
     };
     callGetAllWishListItems();
   }, [wishListId]);
@@ -199,6 +198,17 @@ export default function EditWishList() {
     setWishListItemId(event.target.value);
   };
 
+  const getItemsFromServer = async () => {
+    const items = await getAllWishListItems(wishListId);
+    setWishListItems(items);
+    setTitle('');
+    setComment('');
+    setDesireDegree('');
+    setPicture('');
+    setWishListItemId('');
+    setAssigneeId('');
+  };
+
   // Сохранение WishListItem
   const handleSaveWishListItem = async () => {
     if (!wishListItemId) {
@@ -208,14 +218,7 @@ export default function EditWishList() {
       // Update
       await patchWishListItem(wishListId, wishListItemId, picture, title, comment, desireDegree, assigneeId);
     }
-    const items = await getAllWishListItems(wishListId);
-    setWishListItems(items);
-    setTitle('');
-    setComment('');
-    setDesireDegree('');
-    setPicture('');
-    setWishListItemId('');
-    setAssigneeId('');
+    await getItemsFromServer();
   };
 
   const handleClickEdit = (wishListItem) => () => {
@@ -230,12 +233,7 @@ export default function EditWishList() {
   const handleClickDelete = (wishListItem) => async () => {
     await deleteWishListItem(wishListItem._id, wishListId);
     const items = await getAllWishListItems(wishListId);
-    setWishListItems(items);
-    setTitle('');
-    setComment('');
-    setDesireDegree('');
-    setPicture('');
-    setWishListItemId('');
+    getItemsFromServer();
   };
 
   const handleClickAssignee = (wishListItem) => async () => {
@@ -248,6 +246,7 @@ export default function EditWishList() {
       wishListItem.desireDegree,
       wishListItem.assigneeId
     );
+    await getItemsFromServer();
   };
 
   return (
@@ -290,15 +289,15 @@ export default function EditWishList() {
                 />
               </td>
               <td className="rating-area" onChange={handleDesireDegree}>
-                <input type="radio" id="star-5" name="rating" value="5" />
+                <input type="radio" id="star-5" name="rating" value="5" checked={desireDegree === "5"} />
                 <label htmlFor="star-5" title="Оценка «5»" />
-                <input type="radio" id="star-4" name="rating" value="4" />
+                <input type="radio" id="star-4" name="rating" value="4" checked={desireDegree === "4"} />
                 <label htmlFor="star-4" title="Оценка «4»" />
-                <input type="radio" id="star-3" name="rating" value="3" />
+                <input type="radio" id="star-3" name="rating" value="3" checked={desireDegree === "3"} />
                 <label htmlFor="star-3" title="Оценка «3»" />
-                <input type="radio" id="star-2" name="rating" value="2" />
+                <input type="radio" id="star-2" name="rating" value="2" checked={desireDegree === "2"} />
                 <label htmlFor="star-2" title="Оценка «2»" />
-                <input type="radio" id="star-1" name="rating" value="1" />
+                <input type="radio" id="star-1" name="rating" value="1" checked={desireDegree === "1"} />
                 <label htmlFor="star-1" title="Оценка «1»" />
               </td>
               <td>
@@ -318,48 +317,57 @@ export default function EditWishList() {
                 </button>
               </td>
             </tr>
-            {wishListItems.map((el) => (
-              <tr key={el._id} /* style={{ display: 'flex', marginTop: 6 }} */>
-                <td>
-                  <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
-                    <img width={150} alt="Желание" src={el.picture} />
-                  </div>
-                </td>
-                <td>
-                  <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>{el.title}</div>
-                </td>
-                <td>
-                  <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>{el.comment}</div>
-                </td>
-                <td>
-                  <div className="rating-area" style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
-                    {el.desireDegree}
-                  </div>
-                </td>
-                <td>
-                  <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
-                    <input type="checkbox" id="assignee" name="assignee" onClick={handleClickAssignee(el)} />
-                  </div>
-                </td>
-                <td>
-                  <input className="inputItem" disabled={true} value={el._id} />
-                </td>
-                <td>
-                  <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
-                    <button className="btn1" onClick={handleClickEdit(el)}>
-                      Редактировать
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
-                    <button className="btn1" onClick={handleClickDelete(el)}>
-                      Удалить
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+            {wishListItems.map((el) => {
+              const hasAssignee = !!el.assigneeId;
+              return (
+                <tr key={el._id} /* style={{ display: 'flex', marginTop: 6 }} */>
+                  <td>
+                    <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
+                      <img width={150} alt="Желание" src={el.picture} />
+                    </div>
+                  </td>
+                  <td>
+                    <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>{el.title}</div>
+                  </td>
+                  <td>
+                    <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>{el.comment}</div>
+                  </td>
+                  <td>
+                    <div className="rating-area" style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
+                      {el.desireDegree}
+                    </div>
+                  </td>
+                  <td>
+                    <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
+                      <input
+                        type="checkbox"
+                        id="assignee"
+                        name="assignee"
+                        onClick={handleClickAssignee(el)}
+                        checked={hasAssignee}
+                      />
+                    </div>
+                  </td>
+                  <td>
+                    <input className="inputItem" disabled={true} value={el._id} />
+                  </td>
+                  <td>
+                    <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
+                      <button className="btn1" onClick={handleClickEdit(el)}>
+                        Редактировать
+                      </button>
+                    </div>
+                  </td>
+                  <td>
+                    <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
+                      <button className="btn1" onClick={handleClickDelete(el)}>
+                        Удалить
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

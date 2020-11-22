@@ -21,15 +21,15 @@ export const Navibar = () => {
       <Navbar.Toggle aria-controls='responsive-navbar-nav' />
       <Navbar.Collapse id='responsive-navbar-nav'>
         <Nav className='mr-auto'>
-          <Nav.Link>
+          <div className="nav-link">
             <Link to={PAGES.wishList.path}> {PAGES.wishList.title} </Link>
-          </Nav.Link>
-          <Nav.Link>
+          </div>
+          <div className="nav-link">
             <Link to={PAGES.howItWorks.path}> {PAGES.howItWorks.title} </Link>
-          </Nav.Link>
-          <Nav.Link>
+          </div>
+          <div className="nav-link">
             <Link to={PAGES.newWishList.path}> {PAGES.newWishList.title} </Link>
-          </Nav.Link>
+          </div>
         </Nav>
         <Nav>
           <Button variant='primary'>

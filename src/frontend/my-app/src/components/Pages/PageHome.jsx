@@ -57,18 +57,20 @@ export default function PageHome() {
       </div>
       <div>
         <table className="table1">
-          {wishLists.map((el) => (
-            <tr key={el._id} /* style={{ display: 'flex', marginTop: 6 }} */>
-              <td>
-                <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>{el.owner.name}</div>
-              </td>
-              <td>
-                <div className="wishlist_id" style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
-                  {el._id}
-                </div>
-              </td>
-            </tr>
-          ))}
+          <tbody>
+            {wishLists.map((el) => (
+              <tr key={el._id} /* style={{ display: 'flex', marginTop: 6 }} */>
+                <td>
+                  <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>{el.owner.name}</div>
+                </td>
+                <td>
+                  <div className="wishlist_id" style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
+                    {el._id}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </React.Fragment>
