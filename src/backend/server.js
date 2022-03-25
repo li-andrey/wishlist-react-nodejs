@@ -157,8 +157,11 @@ app.get("/api/wishlists", async function (req, res) {
 
 // Получение WishList
 app.get("/api/wishlist", async function (req, res) {
-  const wishLists = await WishList.findOne({}).populate('owner');
+  const wishListId = req.params.wishListId
+  console.log(222, wishListId)
+  const wishLists = await WishList.findOne({ wishListId });
   res.json(wishLists);
+
 });
 
 // Создание нового WishList
@@ -226,8 +229,7 @@ app.patch("/api/wishlists/:wish_list_id/wishlist_item/:id", async function (req,
 // Редактирование WishListItem назначение Assignee
 app.patch("/api/wishlists/:wish_list_id/wishlist_item/:id/set_assignee", async function (req, res) {
   const id = req.params.id;
-  const { picture, title, comment, desireDegree } = req.body;
-  const assigneeId = curentUserId;
+  const { picture, title, comment, desireDegree, assigneeId } = req.body;
   const result = await WishListItem.update(
     { _id: id },
     { title, comment, desireDegree, picture, assigneeId }
