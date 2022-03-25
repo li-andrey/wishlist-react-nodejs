@@ -4,10 +4,9 @@ import ResponsivePlayer from '../ResponsivePlayer';
 export default function HowItWorks(props) {
   return (
     <React.Fragment>
-      <div className="content">
-        <h1> Как это работает </h1>
-        <ResponsivePlayer />
-      </div>
+      <h1 className="main_h1"> Как это работает </h1>
+      <h2 className="h2-faq"> MY WISHLIST - это уютный сервис для помощи в подборе подарков</h2>
+      <ResponsivePlayer />
     </React.Fragment>
   );
 }

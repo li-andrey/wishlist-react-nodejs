@@ -1,26 +1,25 @@
 import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { PAGES } from './AppRouter'
-import { Navbar, Nav, Button } from 'react-bootstrap'
+import { PAGES } from './AppRouter';
+import { Navbar, Nav } from 'react-bootstrap';
 
 export const Navibar = () => {
-  const history = useHistory()
-  const auth = useContext(AuthContext)
+  const history = useHistory();
+  const auth = useContext(AuthContext);
 
-  const handleLogout = event => {
-    event.preventDefault()
-    auth.logout()
-    history.push('/')
-  }
-
+  const handleLogout = (event) => {
+    event.preventDefault();
+    auth.logout();
+    history.push('/');
+  };
 
   return (
-    <Navbar className='navibar' collapseOnSelect expand='md' >
-      {/*  <Navbar.Brand> MyWishList </Navbar.Brand> */}
-      <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-      <Navbar.Collapse id='responsive-navbar-nav'>
-        <Nav className='mr-auto'>
+    <Navbar className="navibar" collapseOnSelect expand="lg">
+      {/*     <Navbar.Brand className="nav-brand"> FRIENDS WISHLIST </Navbar.Brand> */}
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
           <div className="nav-link">
             <Link to={PAGES.wishList.path}> {PAGES.wishList.title} </Link>
           </div>
@@ -32,12 +31,11 @@ export const Navibar = () => {
           </div>
         </Nav>
         <Nav>
-          <Button variant='primary'>
-            <a href={PAGES.wishList.path} onClick={handleLogout} > Выйти </a>
-          </Button>
+          <button className="btn-exit" onClick={handleLogout}>
+            Выйти
+          </button>
         </Nav>
       </Navbar.Collapse>
-    </Navbar >
-  )
-
-}
+    </Navbar>
+  );
+};

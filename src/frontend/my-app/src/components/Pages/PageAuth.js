@@ -56,7 +56,9 @@ export default function PageAuth() {
 
   const handleRegister = () => {
     postRegister({ ...form });
+    window.alert('Пользователь зарегистрирован, нажмите кнопку "Войти"')
   }
+
 
   const handleLogin = async () => {
     const data = await postLogin({ ...form })
@@ -65,25 +67,22 @@ export default function PageAuth() {
 
   return (
     <React.Fragment>
-      <h1> Авторизация </h1>
-      <div className='auth'>
-        <div>
+      <h1 className='h1-auth'> Авторизация </h1>
+      <form className='form'>
+        <div className="row">
           <input className='inputAuth' placeholder='Введите ФИО' id='name' type='text' name='name' onChange={changeHandler} />
-          <label htmlFor='name'> ФИО </label>
         </div>
-        <div>
+        <div className="row">
           <input className='inputAuth' placeholder='Введите email' id='email' type='text' name='email' value={form.email} onChange={changeHandler} />
-          <label htmlFor='email'> Email </label>
         </div>
-        <div>
+        <div className="row">
           <input className='inputAuth' placeholder='Введите пароль' id='password' type='password' name='password' value={form.password} onChange={changeHandler} />
-          <label htmlFor='password'> Пароль </label>
         </div>
-        <div>
-          <Button className='mr-2' variant='primary' onClick={handleLogin}> Войти </Button>
-          <Button className='mr-2' variant='primary' onClick={handleRegister}> Зарегистрироваться </Button>
+        <div className="btn-row">
+          <Button className='btn-auth-1' onClick={handleLogin}> Войти </Button>
+          <Button className='btn-auth-2' onClick={handleRegister}> Регистрация </Button>
         </div>
-      </div>
+      </form>
     </React.Fragment >
   );
 }

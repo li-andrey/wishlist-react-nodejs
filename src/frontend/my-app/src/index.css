@@ -7,146 +7,722 @@ a:hover {
 Link {
   color: #fff;
 }
+
+h1,
+button {
+  font-family: 'Yeseva One';
+}
+
 html,
 body {
-  height: 100%;
-  background: linear-gradient(180deg, #1a4d52, #d7dea9);
+  font-family: 'Merriweather';
 }
 
 body {
-  text-align: center;
+  text-align: left;
   color: #fff;
-  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
+
+  background-color: #0d3d69;
 }
 
 .wrapper {
-  display: flex;
+  /*   display: flex;
   flex-direction: column;
   min-height: 100%;
-  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100%; */
+  margin: auto;
+  width: 100%;
+  padding-left: 72px;
+  padding-right: 72px;
 }
 
+/* Навигационная шапка */
 .nav-link {
-  font-size: 18px;
-  padding: 0.25rem 0;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
-  background-color: transparent;
+  font-size: 20px;
+  font-weight: 300;
+  color: #fcfcfc;
   border-bottom: 0.25rem solid transparent;
 }
 
 .navibar {
-  padding-top: 1rem;
+  padding-left: 64px;
+  padding-right: 72px;
+  background: rgba(0, 0, 0, 0.1);
 }
 
-.content {
-  flex: 1 0 auto;
+.btn-exit {
+  width: 165px;
+  height: 55px;
+  background: transparent;
+  border: 4px solid #ffffff;
+  color: white;
+  font-size: 20px;
 }
+
+.btn-exit:hover,
+.btn-exit:active {
+  background-color: #fff;
+  color: #fa1072;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .navibar {
+    padding-left: 24px;
+    padding-right: 24px;
+    background: rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Главная страница */
 .cover {
-  flex: 1 0 auto;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .main_h1 {
-  margin-top: 5%;
-  margin-bottom: 3%;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-top: 70px;
+  font-size: 48px;
+  text-align: center;
+  font-weight: 400;
+  width: auto;
 }
-
+.main-content {
+  margin: auto;
+  display: inline;
+}
 .main_h2 {
-  margin-top: 2%;
-  margin-bottom: 1%;
-  margin-left: 20%;
-  margin-right: 20%;
-}
-
-.inputID {
-  width: 450px;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: white;
-  background-image: url();
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  padding: 12px 20px 12px 30px;
-  transition: width 0.4s ease-in-out;
-  border-radius: 40px;
-  font-weight: 600;
-  margin: 10px;
-}
-
-.inputID:focus {
-  width: 35%;
-}
-
-.inputItem {
-  width: 100%;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-  background-color: white;
-  padding: 10px 10px 10px 20px;
-  transition: width 0.4s ease-in-out;
-  border-radius: 40px;
-  font-weight: 600;
-}
-
-.inputAuth {
-  width: 20%;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-  background-color: white;
-  padding: 10px 10px 10px 20px;
-  transition: width 0.4s ease-in-out;
-  border-radius: 40px;
-  font-weight: 600;
-  margin: 5px;
-}
-
-.auth {
+  margin-top: 48px;
+  font-size: 24px;
   text-align: center;
+  font-weight: 400;
+}
+.btn-pink {
+  width: 165px;
+  height: 55px;
+  background: #fa1072;
+  border: 4px solid #ffffff;
+  font-weight: 400;
+  font-size: 20px;
+  color: white;
+  margin-left: 24px;
 }
 
-.btn1 {
+.btn-open {
+  width: 200px;
+  padding: 8px;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background: transparent;
+}
+
+.btn-open:hover,
+.btn-open:active {
   background-color: #fff;
-  border-radius: 40px;
-  border: none;
-  color: #1d7982;
-  font-weight: 600;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  color: #fa1072;
 }
 
-.table-container {
-  width: 95%;
-  overflow-y: auto;
-  _overflow: auto;
-  margin: 0 0 1em;
+.table-users {
+  margin-top: 34px;
+  font-weight: 300;
 }
 
 .table1 {
-  margin: auto;
+  width: 100%;
+  font-weight: 300;
 }
 
-.wishlist_id {
-  padding-left: 30px;
+.tb-users {
+  padding: 0 0 15px 0;
+  font-size: 18px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+  .wrapper {
+    margin: 0 auto;
+    width: 100%;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+  .cover {
+    display: flex;
+    flex-direction: column;
+  }
+  .main_h2 {
+    margin-top: 48px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: 400;
+  }
+  .table1 {
+    width: 100%;
+    font-weight: 300;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .wrapper {
+    margin: 0 auto;
+    width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .cover {
+    display: flex;
+    flex-direction: column;
+  }
+  .main_h1 {
+    margin-top: 48px;
+    font-size: 27px;
+    text-align: center;
+    font-weight: 400;
+    width: auto;
+  }
+  .main_h2 {
+    margin-top: 24px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 400;
+  }
+  .btn-pink {
+    width: 102px;
+    height: 32px;
+    background: #fa1072;
+    border: 4px solid #ffffff;
+    font-weight: 400;
+    font-size: 13px;
+    color: white;
+    margin-left: 12px;
+  }
+  .table-users {
+    margin-top: 29px;
+    font-weight: 300;
+  }
+  .table1 {
+    width: 100%;
+    font-weight: 300;
+  }
+  .tb-users {
+    padding: 0 0 15px 0;
+    font-size: 14px;
+  }
+}
+/* Как это работает */
+.h2-faq {
+  margin-top: 40px;
+  margin-right: 644px;
+  font-weight: 400;
+}
+
+.player-wrapper {
+  position: relative;
+  padding-top: 30%; /* Player ratio: 100 / (1280 / 720) */
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 50%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+  .h2-faq {
+    margin: 48px 0px 96px;
+    font-size: 40px;
+    font-weight: 400;
+    text-align: center;
+  }
+  .react-player {
+    position: absolute;
+    top: 0;
+    left: 25%;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .h2-faq {
+    margin: 24px 0px 48px;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+  }
+  .player-wrapper {
+    position: relative;
+    padding-top: 30%; /* Player ratio: 100 / (1280 / 720) */
+  }
+  .react-player {
+    position: absolute;
+    top: 0;
+    left: 25%;
+  }
+  .btn-open {
+    width: 100px;
+  }
+  .second-h1 {
+    margin-top: 48px;
+    margin-bottom: 48px;
+    font-size: 36px;
+    font-weight: 400;
+  }
+}
+
+/* Создать WishList */
+.create-wishlist {
+  text-align: center;
+}
+
+.second-h1 {
+  margin-top: 120px;
+  margin-bottom: 48px;
+  font-size: 48px;
+  font-weight: 400;
+}
+
+/* Редактирование WishList */
+.table-container {
+  padding-top: 48px;
+  overflow-y: auto;
+  _overflow: auto;
+}
+
+.inputItem1 {
+  width: 100%;
+  height: 30px;
+  box-sizing: border-box;
+  border: 1px solid #c4c4c4;
+  font-size: 16px;
+  background-color: white;
+  padding: 7px 7px 7px 10px;
+  transition: width 0.4s ease-in-out;
+}
+
+.inputItem2 {
+  width: 100%;
+  height: 30px;
+  box-sizing: border-box;
+  border: 1px solid #c4c4c4;
+  font-size: 16px;
+  background-color: white;
+  padding: 7px 7px 7px 10px;
+  transition: width 0.4s ease-in-out;
+}
+.inputItem3 {
+  width: 100%;
+  height: 30px;
+  box-sizing: border-box;
+  border: 1px solid #c4c4c4;
+  font-size: 16px;
+  background-color: white;
+  padding: 7px 7px 7px 10px;
+  transition: width 0.4s ease-in-out;
+}
+
+.inputItem1:focus {
+  width: 400%;
+  z-index: 1;
+  position: relative;
+}
+.inputItem2:focus {
+  width: 300%;
+  z-index: 2;
+  position: relative;
+}
+.inputItem3:focus {
+  width: 500%;
+  z-index: 3;
+  position: relative;
+}
+
+th {
+  padding: 12px;
+  padding-right: 30px;
+  font-size: 18px;
+  font-weight: 400;
   text-align: left;
 }
+.tb-middle {
+  text-align: center;
+}
 
-h1 {
-  margin-top: 5%;
-  margin-bottom: 2%;
+td {
+  padding: 12px;
+  padding-right: 25px;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.tb-img {
+  width: 100%;
+}
+
+.tb-booking {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.btn-edit {
+  width: 100%;
+  height: 34px;
+  background: transparent;
+  border: 4px solid #ffffff;
+  box-sizing: border-box;
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.rating-area {
+  overflow: hidden;
+  width: 100%;
+}
+.rating-area:not(:checked) > input {
+  display: none;
+}
+.rating-area:not(:checked) > label {
+  float: right;
+  width: 20%;
+  padding: 0;
+  cursor: pointer;
+  font-size: 32px;
+  line-height: 32px;
+  color: lightgrey;
+  text-shadow: 1px 1px #bbb;
+}
+
+.rating-area:not(:checked) > label:before {
+  content: '★';
+}
+.rating-area > input:checked ~ label {
+  color: gold;
+  text-shadow: 1px 1px #c60;
+}
+.rating-area:not(:checked) > label:hover,
+.rating-area:not(:checked) > label:hover ~ label {
+  color: gold;
+}
+.rating-area > input:checked + label:hover,
+.rating-area > input:checked + label:hover ~ label,
+.rating-area > input:checked ~ label:hover,
+.rating-area > input:checked ~ label:hover ~ label,
+.rating-area > label:hover ~ input:checked ~ label {
+  color: gold;
+  text-shadow: 1px 1px goldenrod;
+}
+.rate-area > label:active {
+  position: relative;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+  .rating-area:not(:checked) > label {
+    float: right;
+    width: 20%;
+    padding: 0;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 32px;
+    color: lightgrey;
+    text-shadow: 1px 1px #bbb;
+  }
+
+  .inputItem1 {
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #c4c4c4;
+    font-size: 14px;
+    background-color: white;
+    padding: 7px 7px 7px 10px;
+    transition: width 0.4s ease-in-out;
+  }
+
+  .inputItem2 {
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #c4c4c4;
+    font-size: 14px;
+    background-color: white;
+    padding: 7px 7px 7px 10px;
+    transition: width 0.4s ease-in-out;
+  }
+  .inputItem3 {
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #c4c4c4;
+    font-size: 14px;
+    background-color: white;
+    padding: 7px 7px 7px 10px;
+    transition: width 0.4s ease-in-out;
+  }
+
+  .inputItem1:focus {
+    width: 400%;
+    z-index: 1;
+    position: relative;
+  }
+  .inputItem2:focus {
+    width: 300%;
+    z-index: 2;
+    position: relative;
+  }
+  .inputItem3:focus {
+    width: 500%;
+    z-index: 3;
+    position: relative;
+  }
+
+  .tb-booking {
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .btn-edit {
+    width: 100%;
+    height: 34px;
+    background: transparent;
+    border: 4px solid #ffffff;
+    box-sizing: border-box;
+    color: white;
+    font-size: 13px;
+    font-weight: 400;
+  }
+  th {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+  }
+
+  td {
+    padding: 10px;
+    padding-right: 20px;
+    font-size: 14px;
+    font-weight: 300;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .rating-area:not(:checked) > label {
+    float: right;
+    width: 20%;
+    padding: 0;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 32px;
+    color: lightgrey;
+    text-shadow: 1px 1px #bbb;
+  }
+
+  .inputItem1 {
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #c4c4c4;
+    font-size: 10px;
+    background-color: white;
+    padding: 5px 5px 5px 7px;
+    transition: width 0.4s ease-in-out;
+  }
+
+  .inputItem2 {
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #c4c4c4;
+    font-size: 10px;
+    background-color: white;
+    padding: 5px 5px 5px 7px;
+    transition: width 0.4s ease-in-out;
+  }
+  .inputItem3 {
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #c4c4c4;
+    font-size: 10px;
+    background-color: white;
+    padding: 5px 5px 5px 7px;
+    transition: width 0.4s ease-in-out;
+  }
+
+  .inputItem1:focus {
+    width: 500%;
+    z-index: 1;
+    position: relative;
+  }
+  .inputItem2:focus {
+    width: 500%;
+    z-index: 2;
+    position: relative;
+  }
+  .inputItem3:focus {
+    width: 500%;
+    z-index: 3;
+    position: relative;
+  }
+
+  .tb-booking {
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .btn-edit {
+    width: 100%;
+    height: 34px;
+    background: transparent;
+    border: 4px solid #ffffff;
+    box-sizing: border-box;
+    color: white;
+    font-size: 13px;
+    font-weight: 400;
+  }
+  th {
+    padding: 5px;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: left;
+  }
+
+  td {
+    padding: 5px;
+    padding-right: 10px;
+    font-size: 10px;
+    font-weight: 300;
+  }
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+.inputWishListItemID {
+  display: none;
+}
+
+/* @media screen and (max-width: 600px) {
+  .main_h1 {
+    font-size: 20px;
+  }
+  .main_h2 {
+    font-size: 15px;
+  }
+  .inputID {
+    width: 90%;
+    font-size: 15px;
+  }
+  .inputID:focus {
+    width: 100%;
+  }
+} */
+
+/* Страница авторизации */
+
+.h1-auth {
+  padding-top: 198px;
+  text-align: center;
+}
+
+.form {
+  /* Расположим форму по центру страницы */
+  margin: 0 auto;
+  padding-top: 48px;
+  width: 416px;
+}
+
+.inputAuth {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #c4c4c4;
+}
+
+.btn-auth-1 {
+  width: 196px;
+  height: 55px;
+  background-color: #fa1072;
+  border: 4px solid #ffffff;
+  box-sizing: border-box;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: -14px;
+}
+
+.btn-auth-2 {
+  width: 196px;
+  height: 55px;
+  background: transparent;
+  border: 4px solid #ffffff;
+  box-sizing: border-box;
+  color: white;
+  font-size: 16px;
+  margin-left: 55px;
+  margin-right: -14px;
+}
+
+.row {
+  margin-bottom: 24px;
+}
+
+.btn-row {
+  margin-top: 48px;
+  display: flex;
+}
+
+@media screen and (max-width: 767px) {
+  .h1-auth {
+    padding-top: 115px;
+    text-align: center;
+    font-size: 36px;
+  }
+
+  .form {
+    /* Расположим форму по центру страницы */
+    margin: 0 auto;
+    padding-top: 23px;
+    width: 90%;
+  }
+
+  .inputAuth {
+    width: 100%;
+    padding: 12px 24px;
+    border: 1px solid #c4c4c4;
+  }
+  .btn-row {
+    margin-top: 48px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btn-auth-1 {
+    width: 130px;
+    height: 41px;
+    background-color: #fa1072;
+    border: 4px solid #ffffff;
+    box-sizing: border-box;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    margin-left: -15px;
+  }
+
+  .btn-auth-2 {
+    width: 130px;
+    height: 41px;
+    background: transparent;
+    border: 4px solid #ffffff;
+    box-sizing: border-box;
+    color: white;
+    font-size: 13px;
+    margin-right: -15px;
+  }
+
+  .row {
+    margin-bottom: 24px;
+  }
 }

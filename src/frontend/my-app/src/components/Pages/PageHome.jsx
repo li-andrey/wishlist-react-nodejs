@@ -20,8 +20,6 @@ async function getAllWishList() {
 
 export default function PageHome() {
   const history = useHistory();
-  const [wishListId, setWishListId] = React.useState('');
-
   const [wishLists, setWishLists] = React.useState([]);
 
   React.useEffect(() => {
@@ -31,47 +29,39 @@ export default function PageHome() {
     };
     callGetAllWishLists();
   }, []);
+  console.log(1111, wishLists);
 
-  const handleWishListId = (event) => {
-    setWishListId(event.target.value);
-  };
-  const handleWishList = async () => {
-    history.push(`/wishlists/${wishListId}`);
-  };
   return (
     <React.Fragment>
       <div className="cover">
-        <h1 className="main_h1">Friend's WishList - это уютный сервис для помощи в подборе подарков своим близким</h1>
-        <h2 className="main_h2">
-          Чтобы найти свой WishList или WishList друга, введите соответсвующий идентификационный номер
-        </h2>
-        <input
-          className="inputID"
-          placeholder="Введите идентификационный номер вашего друга"
-          onChange={handleWishListId}
-        />
-        <button className="btn1" onClick={handleWishList}>
-          Найти
-        </button>
-        <h2 className="main_h2">Идентификационный номер можно найти в списке ниже:</h2>
-      </div>
-      <div>
-        <table className="table1">
-          <tbody>
-            {wishLists.map((el) => (
-              <tr key={el._id} /* style={{ display: 'flex', marginTop: 6 }} */>
-                <td>
-                  <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>{el.owner.name}</div>
-                </td>
-                <td>
-                  <div className="wishlist_id" style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
-                    {el._id}
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <h1 className="main_h1">Мы поможем подобрать подарок вашим близким</h1>
+
+        <div className="main-content">
+          <h2 className="main_h2">Список всех Whishlists:</h2>
+          <div className="table-users">
+            <table className="table1">
+              <tbody>
+                {wishLists.map((el) => (
+                  <tr key={el._id}>
+                    <td className="tb-users">
+                      <div>{el.owner.name}</div>
+                    </td>
+                    <td className="tb-users">
+                      <button
+                        className="btn-open"
+                        onClick={() => {
+                          history.push(`/wishlists/${el._id}`);
+                        }}
+                      >
+                        Перейти
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </React.Fragment>
   );

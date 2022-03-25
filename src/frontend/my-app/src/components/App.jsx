@@ -15,15 +15,8 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ token, login, logout, userId, isAuthenticated }}>
       <Router>
-        <div className="wrapper">
-          {isAuthenticated && <Navibar />}
-          <div className="content">{routes}</div>
-          <div className="footer">
-            <p>
-              <a href="mailto:EZaykovskiy@mail.ru">EZaykovskiy@mail.ru</a>, 2020
-            </p>
-          </div>
-        </div>
+        {isAuthenticated && <Navibar />}
+        <div className="wrapper">{routes}</div>
       </Router>
     </AuthContext.Provider>
   );

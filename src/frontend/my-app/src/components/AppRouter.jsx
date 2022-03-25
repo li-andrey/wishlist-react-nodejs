@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PageHowItWorks from './Pages/PageHowItWorks';
 import PageHome from './Pages/PageHome';
 import PageNewWishList from './Pages/PageNewWishList';
@@ -19,7 +19,7 @@ export const PAGES = {
   },
   newWishList: {
     id: 'newWishList',
-    title: 'Создать свой WishList',
+    title: 'Создать WishList',
     path: '/wishlists',
   },
   editWishList: {

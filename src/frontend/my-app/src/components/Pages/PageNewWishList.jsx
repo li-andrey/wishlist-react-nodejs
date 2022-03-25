@@ -34,9 +34,9 @@ export default function NewWishList() {
 
   return (
     <React.Fragment>
-      <h1> Создать свой WishList </h1>
-      <div>
-        <button className="btn1" onClick={handleNewWishList}>
+      <div className="create-wishlist">
+        <h1 className="second-h1"> Создать свой WishList </h1>
+        <button className="btn-pink" onClick={handleNewWishList}>
           Создать
         </button>
       </div>
