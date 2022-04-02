@@ -9,8 +9,8 @@ import '../index.css';
 
 export default function App() {
   const { token, login, logout, userId } = useAuth();
-  console.log('321', token);
   const isAuthenticated = !!token;
+  console.log(isAuthenticated);
   const routes = AppRouter(isAuthenticated);
   return (
     <AuthContext.Provider value={{ token, login, logout, userId, isAuthenticated }}>

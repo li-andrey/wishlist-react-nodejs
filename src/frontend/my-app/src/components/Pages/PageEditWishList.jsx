@@ -173,9 +173,12 @@ export default function EditWishList() {
     console.log(55555, wishListId);
     console.log(55555, ownerName.owner.name);
   }; */
+
   React.useEffect(() => {
     const callGetWishList = async () => {
       const oneWishList = await getWishList(wishListId);
+      console.log('oneWishList', oneWishList);
+
       setOwnerName(oneWishList.owner.name);
     };
     callGetWishList();
@@ -240,7 +243,7 @@ export default function EditWishList() {
   // Отправление DELETE запроса на сервер для удаления WishListItem
   const handleClickDelete = (wishListItem) => async () => {
     await deleteWishListItem(wishListItem._id, wishListId);
-    const items = await getAllWishListItems(wishListId);
+    await getAllWishListItems(wishListId);
     getItemsFromServer();
   };
 

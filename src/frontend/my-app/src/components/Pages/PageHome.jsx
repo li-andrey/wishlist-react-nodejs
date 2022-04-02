@@ -29,12 +29,14 @@ export default function PageHome() {
     };
     callGetAllWishLists();
   }, []);
-  console.log(1111, wishLists);
 
   return (
     <React.Fragment>
       <div className="cover">
         <h1 className="main_h1">Мы поможем подобрать подарок вашим близким</h1>
+        <p className="second_title">
+          <em>Для всех тех, кто точно знает какой хочет подарок и для всех тех, кто не знает, что подарить</em>
+        </p>
 
         <div className="main-content">
           <h2 className="main_h2">Список всех Whishlists:</h2>

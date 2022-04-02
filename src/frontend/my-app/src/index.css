@@ -13,6 +13,10 @@ button {
   font-family: 'Yeseva One';
 }
 
+.second_title {
+text-align: center;
+}
+
 html,
 body {
   font-family: 'Merriweather';
@@ -25,14 +29,12 @@ body {
   background-color: #0d3d69;
 }
 
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
 .wrapper {
-  /*   display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; */
   margin: auto;
   width: 100%;
   padding-left: 72px;
@@ -41,7 +43,8 @@ body {
 
 /* Навигационная шапка */
 .nav-link {
-  font-size: 20px;
+  padding: 6px;
+  font-size: 18px;
   font-weight: 300;
   color: #fcfcfc;
   border-bottom: 0.25rem solid transparent;
@@ -54,18 +57,18 @@ body {
 }
 
 .btn-exit {
-  width: 165px;
-  height: 55px;
+  width: 150px;
+  height: 50px;
   background: transparent;
-  border: 4px solid #ffffff;
+  border: 2px solid #ffffff;
   color: white;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .btn-exit:hover,
 .btn-exit:active {
   background-color: #fff;
-  color: #fa1072;
+  color: #E34A6F;
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
@@ -84,8 +87,8 @@ body {
 }
 
 .main_h1 {
-  margin-top: 70px;
-  font-size: 48px;
+  margin-top: 90px;
+  font-size: 44px;
   text-align: center;
   font-weight: 400;
   width: auto;
@@ -103,10 +106,10 @@ body {
 .btn-pink {
   width: 165px;
   height: 55px;
-  background: #fa1072;
-  border: 4px solid #ffffff;
+  background: #E34A6F;
+  border: 1px solid #ffffff;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 18px;
   color: white;
   margin-left: 24px;
 }
@@ -123,7 +126,7 @@ body {
 .btn-open:hover,
 .btn-open:active {
   background-color: #fff;
-  color: #fa1072;
+  color: #E34A6F;
 }
 
 .table-users {
@@ -143,38 +146,17 @@ body {
 
 @media screen and (min-width: 768px) and (max-width: 1440px) {
   .wrapper {
-    margin: 0 auto;
-    width: 100%;
     padding-left: 48px;
     padding-right: 48px;
-  }
-  .cover {
-    display: flex;
-    flex-direction: column;
-  }
-  .main_h2 {
-    margin-top: 48px;
-    font-size: 24px;
-    text-align: center;
-    font-weight: 400;
-  }
-  .table1 {
-    width: 100%;
-    font-weight: 300;
   }
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
   .wrapper {
-    margin: 0 auto;
-    width: 100%;
     padding-left: 24px;
     padding-right: 24px;
   }
-  .cover {
-    display: flex;
-    flex-direction: column;
-  }
+
   .main_h1 {
     margin-top: 48px;
     font-size: 27px;
@@ -182,40 +164,30 @@ body {
     font-weight: 400;
     width: auto;
   }
-  .main_h2 {
-    margin-top: 24px;
-    font-size: 15px;
-    text-align: center;
-    font-weight: 400;
-  }
   .btn-pink {
-    width: 102px;
-    height: 32px;
-    background: #fa1072;
-    border: 4px solid #ffffff;
-    font-weight: 400;
+    width: 135px;
+    height: 45px;
     font-size: 13px;
-    color: white;
     margin-left: 12px;
   }
   .table-users {
     margin-top: 29px;
-    font-weight: 300;
   }
-  .table1 {
-    width: 100%;
-    font-weight: 300;
-  }
+
   .tb-users {
-    padding: 0 0 15px 0;
     font-size: 14px;
   }
 }
 /* Как это работает */
+.third-h1{
+  margin-top: 90px;
+  font-size: 44px;
+}
+
 .h2-faq {
   margin-top: 40px;
   margin-right: 644px;
-  font-weight: 400;
+  font-size: 30px;
 }
 
 .player-wrapper {
@@ -230,33 +202,30 @@ body {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1440px) {
+  .third-h1{
+text-align: center;
+  }
   .h2-faq {
-    margin: 48px 0px 96px;
-    font-size: 40px;
-    font-weight: 400;
+    margin: 48px 0px 60px;
+    font-size:30px;
     text-align: center;
   }
   .react-player {
-    position: absolute;
-    top: 0;
     left: 25%;
   }
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
+  .third-h1{
+    text-align: center;
+      }
   .h2-faq {
-    margin: 24px 0px 48px;
+    margin: 24px 0px 40px;
     font-size: 20px;
-    font-weight: 400;
     text-align: center;
   }
-  .player-wrapper {
-    position: relative;
-    padding-top: 30%; /* Player ratio: 100 / (1280 / 720) */
-  }
+
   .react-player {
-    position: absolute;
-    top: 0;
     left: 25%;
   }
   .btn-open {
@@ -266,7 +235,6 @@ body {
     margin-top: 48px;
     margin-bottom: 48px;
     font-size: 36px;
-    font-weight: 400;
   }
 }
 
@@ -276,10 +244,10 @@ body {
 }
 
 .second-h1 {
-  margin-top: 120px;
+  margin-top: 90px;
   margin-bottom: 48px;
-  font-size: 48px;
-  font-weight: 400;
+  font-size: 44px;
+  text-align: center;
 }
 
 /* Редактирование WishList */
@@ -350,7 +318,7 @@ th {
 
 td {
   padding: 12px;
-  padding-right: 25px;
+  padding-right: 10px;
   font-size: 18px;
   font-weight: 300;
 }
@@ -368,11 +336,17 @@ td {
   width: 100%;
   height: 34px;
   background: transparent;
-  border: 4px solid #ffffff;
+  border: 2px solid #ffffff;
   box-sizing: border-box;
   color: white;
   font-size: 15px;
   font-weight: 400;
+}
+
+.btn-edit:hover {
+  background: white;
+  color: #E34A6F;
+
 }
 
 .rating-area {
@@ -429,35 +403,14 @@ td {
   }
 
   .inputItem1 {
-    width: 100%;
-    height: 30px;
-    box-sizing: border-box;
-    border: 1px solid #c4c4c4;
     font-size: 14px;
-    background-color: white;
-    padding: 7px 7px 7px 10px;
-    transition: width 0.4s ease-in-out;
   }
 
   .inputItem2 {
-    width: 100%;
-    height: 30px;
-    box-sizing: border-box;
-    border: 1px solid #c4c4c4;
     font-size: 14px;
-    background-color: white;
-    padding: 7px 7px 7px 10px;
-    transition: width 0.4s ease-in-out;
   }
   .inputItem3 {
-    width: 100%;
-    height: 30px;
-    box-sizing: border-box;
-    border: 1px solid #c4c4c4;
     font-size: 14px;
-    background-color: white;
-    padding: 7px 7px 7px 10px;
-    transition: width 0.4s ease-in-out;
   }
 
   .inputItem1:focus {
@@ -485,11 +438,10 @@ td {
     width: 100%;
     height: 34px;
     background: transparent;
-    border: 4px solid #ffffff;
+    border: 2px solid #ffffff;
     box-sizing: border-box;
     color: white;
-    font-size: 13px;
-    font-weight: 400;
+    font-size: 12px;
   }
   th {
     padding: 10px;
@@ -500,7 +452,7 @@ td {
 
   td {
     padding: 10px;
-    padding-right: 20px;
+    padding-right: 5px;
     font-size: 14px;
     font-weight: 300;
   }
@@ -570,56 +522,29 @@ td {
     margin: 0 auto;
     width: 100%;
   }
-
-  .btn-edit {
-    width: 100%;
-    height: 34px;
-    background: transparent;
-    border: 4px solid #ffffff;
-    box-sizing: border-box;
-    color: white;
-    font-size: 13px;
-    font-weight: 400;
-  }
   th {
     padding: 5px;
     font-size: 12px;
-    font-weight: 400;
-    text-align: left;
   }
-
   td {
     padding: 5px;
-    padding-right: 10px;
+    padding-right: 5px;
     font-size: 10px;
-    font-weight: 300;
   }
-}
-
-label {
-  padding: 12px 12px 12px 0;
-  display: inline-block;
+  .btn-edit {
+    width: 100%;
+    height: 30px;
+    background: transparent;
+    border: 2px solid #ffffff;
+    box-sizing: border-box;
+    color: white;
+    font-size: 10px;
+  }
 }
 
 .inputWishListItemID {
   display: none;
 }
-
-/* @media screen and (max-width: 600px) {
-  .main_h1 {
-    font-size: 20px;
-  }
-  .main_h2 {
-    font-size: 15px;
-  }
-  .inputID {
-    width: 90%;
-    font-size: 15px;
-  }
-  .inputID:focus {
-    width: 100%;
-  }
-} */
 
 /* Страница авторизации */
 
@@ -644,12 +569,11 @@ label {
 .btn-auth-1 {
   width: 196px;
   height: 55px;
-  background-color: #fa1072;
+  background-color: #E34A6F;
   border: 4px solid #ffffff;
   box-sizing: border-box;
   color: white;
   font-size: 16px;
-  cursor: pointer;
   margin-left: -14px;
 }
 
@@ -663,6 +587,15 @@ label {
   font-size: 16px;
   margin-left: 55px;
   margin-right: -14px;
+}
+
+.btn-auth-1:hover {
+  background: transparent;
+  color: white;
+
+}
+.btn-auth-2:hover {
+  background: #E34A6F;
 }
 
 .row {
@@ -700,10 +633,10 @@ label {
   }
 
   .btn-auth-1 {
-    width: 130px;
-    height: 41px;
-    background-color: #fa1072;
-    border: 4px solid #ffffff;
+    width: 180px;
+    height: 44px;
+    background-color: #E34A6F;
+    border: 2px solid #ffffff;
     box-sizing: border-box;
     color: white;
     font-size: 13px;
@@ -712,10 +645,10 @@ label {
   }
 
   .btn-auth-2 {
-    width: 130px;
-    height: 41px;
+    width: 180px;
+    height: 44px;
     background: transparent;
-    border: 4px solid #ffffff;
+    border: 2px solid #ffffff;
     box-sizing: border-box;
     color: white;
     font-size: 13px;

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import { Button } from 'react-bootstrap'
 
 async function postRegister({ ...form }) {
   // Default options are marked with *
@@ -25,6 +24,8 @@ async function postRegister({ ...form }) {
 async function postLogin({ ...form }) {
   // Default options are marked with *
   const data = { ...form };
+  console.log(data)
+
   const url = '/api/login';
   const response = await fetch(url, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -39,6 +40,7 @@ async function postLogin({ ...form }) {
     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   });
+
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
@@ -55,7 +57,8 @@ export default function PageAuth() {
   }
 
   const handleRegister = () => {
-    postRegister({ ...form });
+    const register = postRegister({ ...form });
+    console.log(register)
     window.alert('Пользователь зарегистрирован, нажмите кнопку "Войти"')
   }
 
@@ -63,6 +66,7 @@ export default function PageAuth() {
   const handleLogin = async () => {
     const data = await postLogin({ ...form })
     auth.login(data.token, data.userId)
+    setForm({ name: '', email: '', password: '' })
   }
 
   return (
@@ -79,10 +83,12 @@ export default function PageAuth() {
           <input className='inputAuth' placeholder='Введите пароль' id='password' type='password' name='password' value={form.password} onChange={changeHandler} />
         </div>
         <div className="btn-row">
-          <Button className='btn-auth-1' onClick={handleLogin}> Войти </Button>
-          <Button className='btn-auth-2' onClick={handleRegister}> Регистрация </Button>
+          <button className='btn-auth-1' onClick={handleLogin}> Войти </button>
+          <button className='btn-auth-2' onClick={handleRegister}> Регистрация </button>
+
         </div>
       </form>
+
     </React.Fragment >
   );
 }
