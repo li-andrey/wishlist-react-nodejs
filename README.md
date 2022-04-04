@@ -1,5 +1,5 @@
 # Wishlist
-#https://tranquil-forest-50807.herokuapp.com/
+#https://my-family-wishlist.herokuapp.com/
 
 login for guests:
 
