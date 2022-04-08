@@ -153,10 +153,10 @@ async function getWishList(wishListId) {
 // Редактирование WishList
 export default function EditWishList() {
   const { wishListId } = useParams();
-  console.log('wishListId', wishListId);
+  // console.log('wishListId', wishListId);
 
   const [wishListItems, setWishListItems] = React.useState([]);
-  console.log('wishListItems', wishListItems);
+  // console.log('wishListItems', wishListItems);
 
   const [picture, setPicture] = React.useState('');
   const [title, setTitle] = React.useState('');
@@ -164,22 +164,21 @@ export default function EditWishList() {
   const [desireDegree, setDesireDegree] = React.useState('');
   const [wishListItemId, setWishListItemId] = React.useState('');
   const [assigneeId, setAssigneeId] = React.useState('');
-  const [ownerName, setOwnerName] = React.useState([]);
+  const [owner, setOwner] = React.useState([]);
   const auth = useContext(AuthContext);
   const userId = auth.userId;
+  const [isYourAcc, setIsYourAcc] = React.useState(false);
 
-  /*   const callGetWishList = async () => {
-    const ownerName = await getWishList(wishListId);
-    console.log(55555, wishListId);
-    console.log(55555, ownerName.owner.name);
-  }; */
+  console.log(123, isYourAcc);
 
   React.useEffect(() => {
     const callGetWishList = async () => {
       const oneWishList = await getWishList(wishListId);
       console.log('oneWishList', oneWishList);
-
-      setOwnerName(oneWishList.owner.name);
+      setOwner(oneWishList.owner);
+      if (userId === owner._id) {
+        setIsYourAcc(true);
+      }
     };
     callGetWishList();
   }, [wishListId]);
@@ -262,7 +261,7 @@ export default function EditWishList() {
 
   return (
     <React.Fragment>
-      <h2 className="main_h1">Список желаний -- {ownerName}</h2>
+      <h2 className="main_h1">Список желаний -- {owner.name}</h2>
       <div className="table-container">
         <table width="100%">
           <tbody>
@@ -278,68 +277,107 @@ export default function EditWishList() {
               </th>
             </tr>
             <tr>
-              <td>
-                <input
-                  className="inputItem1"
-                  placeholder="Здесь нужно указать адрес картинки желаемого подарка в интернете"
-                  onChange={handlePicture}
-                  value={picture}
-                />
-              </td>
-              <td>
-                <input
-                  className="inputItem2"
-                  placeholder="Например: Iphone 12 PRO на 128 GB в синем цвете"
-                  onChange={handleTitle}
-                  value={title}
-                />
-              </td>
-              <td>
-                <input
-                  className="inputItem3"
-                  placeholder="Расскажите о каких-то особенностях продукта, сфере его применения или любую другую информацию, которая поможет выбрать правильный подарок"
-                  onChange={handleComment}
-                  value={comment}
-                />
-              </td>
-              <td>
+              {isYourAcc && (
                 <div>
-                  <div className="rating-area" onChange={handleDesireDegree}>
-                    <input type="radio" id="star-5" name="rating" value="5" checked={desireDegree === '5'} />
-                    <label htmlFor="star-5" title="Оценка «5»" />
-                    <input type="radio" id="star-4" name="rating" value="4" checked={desireDegree === '4'} />
-                    <label htmlFor="star-4" title="Оценка «4»" />
-                    <input type="radio" id="star-3" name="rating" value="3" checked={desireDegree === '3'} />
-                    <label htmlFor="star-3" title="Оценка «3»" />
-                    <input type="radio" id="star-2" name="rating" value="2" checked={desireDegree === '2'} />
-                    <label htmlFor="star-2" title="Оценка «2»" />
-                    <input type="radio" id="star-1" name="rating" value="1" checked={desireDegree === '1'} />
-                    <label htmlFor="star-1" title="Оценка «1»" />
-                  </div>
-                </div>
-              </td>
-              <td>
-                <input className="tb-booking" type="checkbox" />
-              </td>
+                  <td>
+                    <input
+                      className="inputItem1"
+                      placeholder="Здесь нужно указать адрес картинки желаемого подарка в интернете"
+                      onChange={handlePicture}
+                      value={picture}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      className="inputItem2"
+                      placeholder="Например: Iphone 12 PRO на 128 GB в синем цвете"
+                      onChange={handleTitle}
+                      value={title}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      className="inputItem3"
+                      placeholder="Расскажите о каких-то особенностях продукта, сфере его применения или любую другую информацию, которая поможет выбрать правильный подарок"
+                      onChange={handleComment}
+                      value={comment}
+                    />
+                  </td>
+                  <td>
+                    <div>
+                      <div className="rating-area" onChange={handleDesireDegree}>
+                        <input
+                          type="radio"
+                          id="star-5"
+                          name="rating"
+                          value="5"
+                          checked={desireDegree === '5'}
+                          readOnly
+                        />
+                        <label htmlFor="star-5" title="Оценка «5»" />
+                        <input
+                          type="radio"
+                          id="star-4"
+                          name="rating"
+                          value="4"
+                          checked={desireDegree === '4'}
+                          readOnly
+                        />
+                        <label htmlFor="star-4" title="Оценка «4»" />
+                        <input
+                          type="radio"
+                          id="star-3"
+                          name="rating"
+                          value="3"
+                          checked={desireDegree === '3'}
+                          readOnly
+                        />
+                        <label htmlFor="star-3" title="Оценка «3»" />
+                        <input
+                          type="radio"
+                          id="star-2"
+                          name="rating"
+                          value="2"
+                          checked={desireDegree === '2'}
+                          readOnly
+                        />
+                        <label htmlFor="star-2" title="Оценка «2»" />
+                        <input
+                          type="radio"
+                          id="star-1"
+                          name="rating"
+                          value="1"
+                          checked={desireDegree === '1'}
+                          readOnly
+                        />
+                        <label htmlFor="star-1" title="Оценка «1»" />
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <input className="tb-booking" type="checkbox" disabled />
+                  </td>
 
-              <td>
-                <button className="btn-edit" onClick={handleSaveWishListItem}>
-                  Сохранить
-                </button>
-              </td>
-              <td>
-                <input
-                  className="inputWishListItemID"
-                  disabled={true}
-                  onChange={handleChangeWishListItemId}
-                  value={wishListItemId}
-                />
-              </td>
+                  <td>
+                    <button className="btn-edit" onClick={handleSaveWishListItem}>
+                      Сохранить
+                    </button>
+                  </td>
+                  <td>
+                    <input
+                      className="inputWishListItemID"
+                      disabled={true}
+                      onChange={handleChangeWishListItemId}
+                      value={wishListItemId}
+                    />
+                  </td>
+                </div>
+              )}
             </tr>
             {wishListItems.map((el) => {
               const hasAssignee = !!el.assigneeId;
               return (
-                <tr key={el._id} /* style={{ display: 'flex', marginTop: 6 }} */>
+                <tr key={el._id}>
                   <td>
                     <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
                       <img className="tb-img" alt="Желание" src={el.picture} />
@@ -365,26 +403,31 @@ export default function EditWishList() {
                         name="assignee"
                         onClick={handleClickAssignee(el)}
                         checked={hasAssignee}
+                        disabled={hasAssignee}
                       />
                     </div>
                   </td>
                   {/*        <td>
                     <input className="inputItem" disabled={true} value={el._id} />
                   </td> */}
-                  <td>
-                    <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
-                      <button className="btn-edit" onClick={handleClickEdit(el)}>
-                        Редактировать
-                      </button>
+                  {isYourAcc && (
+                    <div>
+                      <td>
+                        <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
+                          <button className="btn-edit" onClick={handleClickEdit(el)} disabled={hasAssignee}>
+                            Редактировать
+                          </button>
+                        </div>
+                      </td>
+                      <td>
+                        <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
+                          <button className="btn-edit" onClick={handleClickDelete(el)} disabled={hasAssignee}>
+                            Удалить
+                          </button>
+                        </div>
+                      </td>
                     </div>
-                  </td>
-                  <td>
-                    <div style={{ flexBasis: 160, flexGrow: 0, flexShrink: 0 }}>
-                      <button className="btn-edit" onClick={handleClickDelete(el)}>
-                        Удалить
-                      </button>
-                    </div>
-                  </td>
+                  )}
                 </tr>
               );
             })}
