@@ -71,13 +71,6 @@ label {
   color: #E34A6F;
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
-  .navibar {
-    padding-left: 24px;
-    padding-right: 24px;
-    background: rgba(0, 0, 0, 0.1);
-  }
-}
 
 /* Главная страница */
 .cover {
@@ -144,40 +137,7 @@ label {
   font-size: 18px;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1440px) {
-  .wrapper {
-    padding-left: 48px;
-    padding-right: 48px;
-  }
-}
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
-  .wrapper {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-  .main_h1 {
-    margin-top: 48px;
-    font-size: 27px;
-    text-align: center;
-    font-weight: 400;
-    width: auto;
-  }
-  .btn-pink {
-    width: 135px;
-    height: 45px;
-    font-size: 13px;
-    margin-left: 12px;
-  }
-  .table-users {
-    margin-top: 29px;
-  }
-
-  .tb-users {
-    font-size: 14px;
-  }
-}
 /* Как это работает */
 .third-h1{
   margin-top: 90px;
@@ -199,43 +159,6 @@ label {
   position: absolute;
   top: 0;
   left: 50%;
-}
-
-@media screen and (min-width: 768px) and (max-width: 1440px) {
-  .third-h1{
-text-align: center;
-  }
-  .h2-faq {
-    margin: 48px 0px 60px;
-    font-size:30px;
-    text-align: center;
-  }
-  .react-player {
-    left: 25%;
-  }
-}
-
-@media screen and (min-width: 320px) and (max-width: 767px) {
-  .third-h1{
-    text-align: center;
-      }
-  .h2-faq {
-    margin: 24px 0px 40px;
-    font-size: 20px;
-    text-align: center;
-  }
-
-  .react-player {
-    left: 25%;
-  }
-  .btn-open {
-    width: 100px;
-  }
-  .second-h1 {
-    margin-top: 48px;
-    margin-bottom: 48px;
-    font-size: 36px;
-  }
 }
 
 /* Создать WishList */
@@ -390,157 +313,6 @@ td {
   position: relative;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1440px) {
-  .rating-area:not(:checked) > label {
-    float: right;
-    width: 20%;
-    padding: 0;
-    cursor: pointer;
-    font-size: 16px;
-    line-height: 32px;
-    color: lightgrey;
-    text-shadow: 1px 1px #bbb;
-  }
-
-  .inputItem1 {
-    font-size: 14px;
-  }
-
-  .inputItem2 {
-    font-size: 14px;
-  }
-  .inputItem3 {
-    font-size: 14px;
-  }
-
-  .inputItem1:focus {
-    width: 400%;
-    z-index: 1;
-    position: relative;
-  }
-  .inputItem2:focus {
-    width: 300%;
-    z-index: 2;
-    position: relative;
-  }
-  .inputItem3:focus {
-    width: 500%;
-    z-index: 3;
-    position: relative;
-  }
-
-  .tb-booking {
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  .btn-edit {
-    width: 100%;
-    height: 34px;
-    background: transparent;
-    border: 2px solid #ffffff;
-    box-sizing: border-box;
-    color: white;
-    font-size: 12px;
-  }
-  th {
-    padding: 10px;
-    font-size: 16px;
-    font-weight: 400;
-    text-align: left;
-  }
-
-  td {
-    padding: 10px;
-    padding-right: 5px;
-    font-size: 14px;
-    font-weight: 300;
-  }
-}
-
-@media screen and (min-width: 320px) and (max-width: 767px) {
-  .rating-area:not(:checked) > label {
-    float: right;
-    width: 20%;
-    padding: 0;
-    cursor: pointer;
-    font-size: 12px;
-    line-height: 32px;
-    color: lightgrey;
-    text-shadow: 1px 1px #bbb;
-  }
-
-  .inputItem1 {
-    width: 100%;
-    height: 30px;
-    box-sizing: border-box;
-    border: 1px solid #c4c4c4;
-    font-size: 10px;
-    background-color: white;
-    padding: 5px 5px 5px 7px;
-    transition: width 0.4s ease-in-out;
-  }
-
-  .inputItem2 {
-    width: 100%;
-    height: 30px;
-    box-sizing: border-box;
-    border: 1px solid #c4c4c4;
-    font-size: 10px;
-    background-color: white;
-    padding: 5px 5px 5px 7px;
-    transition: width 0.4s ease-in-out;
-  }
-  .inputItem3 {
-    width: 100%;
-    height: 30px;
-    box-sizing: border-box;
-    border: 1px solid #c4c4c4;
-    font-size: 10px;
-    background-color: white;
-    padding: 5px 5px 5px 7px;
-    transition: width 0.4s ease-in-out;
-  }
-
-  .inputItem1:focus {
-    width: 500%;
-    z-index: 1;
-    position: relative;
-  }
-  .inputItem2:focus {
-    width: 500%;
-    z-index: 2;
-    position: relative;
-  }
-  .inputItem3:focus {
-    width: 500%;
-    z-index: 3;
-    position: relative;
-  }
-
-  .tb-booking {
-    margin: 0 auto;
-    width: 100%;
-  }
-  th {
-    padding: 5px;
-    font-size: 12px;
-  }
-  td {
-    padding: 5px;
-    padding-right: 5px;
-    font-size: 10px;
-  }
-  .btn-edit {
-    width: 100%;
-    height: 30px;
-    background: transparent;
-    border: 2px solid #ffffff;
-    box-sizing: border-box;
-    color: white;
-    font-size: 10px;
-  }
-}
 
 .inputWishListItemID {
   display: none;
@@ -591,8 +363,6 @@ td {
 
 .btn-auth-1:hover {
   background: transparent;
-  color: white;
-
 }
 .btn-auth-2:hover {
   background: #E34A6F;
@@ -607,20 +377,236 @@ td {
   display: flex;
 }
 
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .navibar {
+    padding-left: 24px;
+    padding-right: 24px;
+    background: rgba(0, 0, 0, 0.1);
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+  .wrapper {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .main_h1 {
+    margin-top: 48px;
+    font-size: 27px;
+    text-align: center;
+    font-weight: 400;
+    width: auto;
+  }
+  .btn-pink {
+    width: 135px;
+    height: 45px;
+    font-size: 13px;
+    margin-left: 12px;
+  }
+  .table-users {
+    margin-top: 29px;
+  }
+
+  .tb-users {
+    font-size: 14px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+  .third-h1{
+text-align: center;
+  }
+  .h2-faq {
+    margin: 48px 0px 60px;
+    font-size:30px;
+    text-align: center;
+  }
+  .react-player {
+    left: 25%;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .third-h1{
+    text-align: center;
+      }
+  .h2-faq {
+    margin: 24px 0px 40px;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .react-player {
+    left: 25%;
+  }
+  .btn-open {
+    width: 100px;
+  }
+  .second-h1 {
+    margin-top: 48px;
+    margin-bottom: 48px;
+    font-size: 36px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+  .rating-area:not(:checked) > label {
+    float: right;
+    width: 20%;
+    padding: 0;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 32px;
+    color: lightgrey;
+    text-shadow: 1px 1px #bbb;
+  }
+
+  .inputItem1 {
+    font-size: 14px;
+  }
+
+  .inputItem2 {
+    font-size: 14px;
+  }
+  .inputItem3 {
+    font-size: 14px;
+  }
+
+  .inputItem1:focus {
+    width: 400%;
+    z-index: 1;
+    position: relative;
+  }
+  .inputItem2:focus {
+    width: 300%;
+    z-index: 2;
+    position: relative;
+  }
+  .inputItem3:focus {
+    width: 500%;
+    z-index: 3;
+    position: relative;
+  }
+  .tb-booking {
+    margin: 0 auto;
+    width: 100%;
+  }
+  .btn-edit {
+    width: 100%;
+    height: 34px;
+    background: transparent;
+    border: 2px solid #ffffff;
+    box-sizing: border-box;
+    color: white;
+    font-size: 12px;
+  }
+  th {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+  }
+  td {
+    padding: 10px;
+    padding-right: 5px;
+    font-size: 14px;
+    font-weight: 300;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .rating-area:not(:checked) > label {
+    float: right;
+    width: 20%;
+    padding: 0;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 32px;
+    color: lightgrey;
+    text-shadow: 1px 1px #bbb;
+  }
+  .inputItem1 {
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #c4c4c4;
+    font-size: 10px;
+    background-color: white;
+    padding: 5px 5px 5px 7px;
+    transition: width 0.4s ease-in-out;
+  }
+  .inputItem2 {
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #c4c4c4;
+    font-size: 10px;
+    background-color: white;
+    padding: 5px 5px 5px 7px;
+    transition: width 0.4s ease-in-out;
+  }
+  .inputItem3 {
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #c4c4c4;
+    font-size: 10px;
+    background-color: white;
+    padding: 5px 5px 5px 7px;
+    transition: width 0.4s ease-in-out;
+  }
+  .inputItem1:focus {
+    width: 500%;
+    z-index: 1;
+    position: relative;
+  }
+  .inputItem2:focus {
+    width: 500%;
+    z-index: 2;
+    position: relative;
+  }
+  .inputItem3:focus {
+    width: 500%;
+    z-index: 3;
+    position: relative;
+  }
+  .tb-booking {
+    margin: 0 auto;
+    width: 100%;
+  }
+  th {
+    padding: 5px;
+    font-size: 12px;
+  }
+  td {
+    padding: 5px;
+    padding-right: 5px;
+    font-size: 10px;
+  }
+  .btn-edit {
+    width: 100%;
+    height: 30px;
+    background: transparent;
+    border: 2px solid #ffffff;
+    box-sizing: border-box;
+    color: white;
+    font-size: 10px;
+  }
+}
 @media screen and (max-width: 767px) {
   .h1-auth {
     padding-top: 115px;
     text-align: center;
     font-size: 36px;
   }
-
   .form {
     /* Расположим форму по центру страницы */
     margin: 0 auto;
     padding-top: 23px;
     width: 90%;
   }
-
   .inputAuth {
     width: 100%;
     padding: 12px 24px;
@@ -631,7 +617,6 @@ td {
     display: flex;
     justify-content: space-between;
   }
-
   .btn-auth-1 {
     width: 180px;
     height: 44px;
@@ -643,7 +628,6 @@ td {
     cursor: pointer;
     margin-left: -15px;
   }
-
   .btn-auth-2 {
     width: 180px;
     height: 44px;
@@ -654,7 +638,6 @@ td {
     font-size: 13px;
     margin-right: -15px;
   }
-
   .row {
     margin-bottom: 24px;
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import PageHowItWorks from './Pages/PageHowItWorks';
 import PageHome from './Pages/PageHome';
 import PageNewWishList from './Pages/PageNewWishList';
@@ -30,7 +30,7 @@ export const PAGES = {
   pageAuth: {
     id: 'pageAuth',
     title: 'Авторизация',
-    path: '/',
+    path: '/login',
   },
 };
 
@@ -59,7 +59,7 @@ export const AppRouter = (isAuthenticated) => {
       <Route path={PAGES.pageAuth.path} exact>
         <PageAuth />
       </Route>
-      {/*<Redirect to={PAGES.wishList.path} />*/}
+      <Redirect to={PAGES.pageAuth.path} />
     </Switch>
   );
 };

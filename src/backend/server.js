@@ -113,6 +113,7 @@ app.post(
     check('password', 'Введите пароль').exists()
   ],
   async function (req, res) {
+    console.log("9999999999999999", req)
     try {
       const errors = validationResult(req)
       if (!errors.isEmpty()) {
